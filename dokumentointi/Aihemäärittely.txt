@@ -1,0 +1,2 @@
+Aihe: Blokus -peli
+Kuvaus: Pelissä on 2-4 pelaajaa.Pelissä asetellaan eri muotoisia neliöistä koostuvia laattoja laudalla siten, että pelaajan omat laatat ovat kiinni toisissaan, mutta ainoastaan kulmista. Pelin edetessä syntyy kilpailua vapaana olevasta tilasta. Pelin voittaa pelaaja, jonka käteen jääneissä laatoissa on vähiten neliöitä."
