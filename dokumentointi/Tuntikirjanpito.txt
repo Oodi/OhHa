@@ -1,1 +1,7 @@
 16.1.2014 Deadline 1. tehtävät n. 30min
+20.1	  Tuumailua ja suunta viivoja 30min
+21.1 	  Laatta luokan ilmaisu ja käännökset 45min
+23.1	  pit:n kanssa tappelu ja luokka kaavio 30min
+27.1      Tuumailtu ja suunniteltu Tarkistuslaudan tarpeellisuus
+28.1      Toteutettu tarkistaminen ja laattojen asettaminen + hahmoteltu vuoron rakennetta
+30.1      Testejä, luokkakaavion päivitys, käyttöliittymän ja pariin virheen korjaus tuumintaa
