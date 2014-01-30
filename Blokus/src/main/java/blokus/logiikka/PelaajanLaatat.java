@@ -17,6 +17,12 @@ public class PelaajanLaatat {
 
 
     }
+    
+    public Laatta getLaattaById(int id) {
+        Laatta laatta = jaljellaLaatat.get(id);
+        pelatutLaatat.put(id, laatta);
+        return laatta;
+    }
 
     public HashMap<Integer, Laatta> getJaljellaLaatat() {
         return jaljellaLaatat;

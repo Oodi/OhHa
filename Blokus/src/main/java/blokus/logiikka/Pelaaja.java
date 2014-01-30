@@ -11,13 +11,21 @@ public class Pelaaja {
     
     private String vari;
     private PelaajanLaatat laatat;
-   // private PeliLauta lauta;
+    private TarkastusLauta lauta;
 
     public Pelaaja(int id, String vari) {
         this.id = id;        
         this.vari = vari;
         laatat = new PelaajanLaatat(vari);
+        lauta = new TarkastusLauta(id);
+ 
     }
+
+    public TarkastusLauta getLauta() {
+        return lauta;
+    }
+    
+    
 
     public int getPisteet() {
         HashMap<Integer,Laatta> apu = laatat.getJaljellaLaatat();
@@ -36,6 +44,10 @@ public class Pelaaja {
     public PelaajanLaatat getLaatat() {
         return laatat;
     }
+    
+    
+
+   
     
     
     

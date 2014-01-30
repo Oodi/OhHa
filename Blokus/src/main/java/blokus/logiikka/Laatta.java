@@ -7,6 +7,7 @@ public class Laatta {
     private int id;
     private int ruudukonKoko = 7; // 7x7
     public int vari;
+     
 
     public Laatta(int koko, int[][] muoto, int id, String vari) {
         this.koko = koko;
@@ -58,6 +59,13 @@ public class Laatta {
     public int[][] getMuoto() {
         return muoto;
     }
+
+    public int getVari() {
+        return vari;
+    }
+
+    
+    
     
     public void tulosta() {
         for (int i = 0; i < muoto.length; i++) {
@@ -73,12 +81,11 @@ public class Laatta {
         String apu = "";
         for (int i = 0; i < muoto.length; i++) {
             for (int j = 0; j < muoto.length; j++) {
-                if (muoto[i][j] == 3) {
+                if (muoto[i][j] == 3) {              
                     apu += "#";
                 } else {
                     apu += " ";
                 }
-
             }
             if (!apu.equals("       ")) {
                 System.out.println(apu);
@@ -91,11 +98,15 @@ public class Laatta {
 
     private int haeVari(String vari) {
         switch (vari) {
-            case "sininen": return 1;
-            case "keltainen": return 2;
-            case "punainen": return 3;    
-            default: return 4;   
-                    
+            case "sininen":
+                return 1;
+            case "keltainen":
+                return 2;
+            case "punainen":
+                return 3;
+            default:
+                return 4;
+
         }
                 
     }
