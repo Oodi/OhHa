@@ -1,39 +1,46 @@
 package blokus.logiikka;
 
-public class Laatta {
+import blokus.conf.GlobaalitMuuttujat;
 
+/**
+ * Pelaaja asettaa laattoja pelilaudalle. Laatalla on muoto, josta ilmenee sen
+ * vuorovaikutus muiden pelilaudalla olevien laattojen suhteen. Laatan koko
+ * vaikuttaa myös siitä saataviin pisteisiin.
+ */
+
+
+public class Laatta {
+     
     private int koko;
     private int[][] muoto;
     private int id;
-    private int ruudukonKoko = 7; // 7x7
-    public int vari;
-     
+    private int pelaajanID;
 
-    public Laatta(int koko, int[][] muoto, int id, String vari) {
+    public Laatta(int koko, int[][] muoto, int id, int pelaajanID) {
         this.koko = koko;
         this.muoto = muoto;
         this.id = id;
-        this.vari = haeVari(vari);
-        
+        this.pelaajanID = pelaajanID;
+
     }
 
     public void kaannaVasempaan() {
-        int[][] kaannos = new int[muoto.length][muoto.length];
+        int[][] kaannos = new int[GlobaalitMuuttujat.RUUDUKON_KOKO][GlobaalitMuuttujat.RUUDUKON_KOKO];
 
-        for (int i = 0; i < kaannos.length; i++) {
-            for (int j = 0; j < kaannos.length; j++) {
-                kaannos[muoto.length - j - 1][i] = muoto[i][j];
+        for (int i = 0; i < GlobaalitMuuttujat.RUUDUKON_KOKO; i++) {
+            for (int j = 0; j < GlobaalitMuuttujat.RUUDUKON_KOKO; j++) {
+                kaannos[GlobaalitMuuttujat.RUUDUKON_KOKO - j - 1][i] = muoto[i][j];
             }
         }
         muoto = kaannos;
     }
 
     public void kaannaOikeaan() {
-        int[][] kaannos = new int[muoto.length][muoto.length];
+        int[][] kaannos = new int[GlobaalitMuuttujat.RUUDUKON_KOKO][GlobaalitMuuttujat.RUUDUKON_KOKO];
 
-        for (int i = 0; i < kaannos.length; i++) {
-            for (int j = 0; j < kaannos.length; j++) {
-                kaannos[j][muoto.length - i - 1] = muoto[i][j];
+        for (int i = 0; i < GlobaalitMuuttujat.RUUDUKON_KOKO; i++) {
+            for (int j = 0; j < GlobaalitMuuttujat.RUUDUKON_KOKO; j++) {
+                kaannos[j][GlobaalitMuuttujat.RUUDUKON_KOKO - i - 1] = muoto[i][j];
             }
         }
         muoto = kaannos;
@@ -42,14 +49,18 @@ public class Laatta {
     }
 
     public void kaannaYmpari() {
-        int[][] kaannos = new int[muoto.length][muoto.length];
+        int[][] kaannos = new int[GlobaalitMuuttujat.RUUDUKON_KOKO][GlobaalitMuuttujat.RUUDUKON_KOKO];
 
-        for (int i = 0; i < kaannos.length; i++) {
-            for (int j = 0; j < kaannos.length; j++) {
-                kaannos[muoto.length - i - 1][j] = muoto[i][j];
+        for (int i = 0; i < GlobaalitMuuttujat.RUUDUKON_KOKO; i++) {
+            for (int j = 0; j < GlobaalitMuuttujat.RUUDUKON_KOKO; j++) {
+                kaannos[GlobaalitMuuttujat.RUUDUKON_KOKO - i - 1][j] = muoto[i][j];
             }
         }
         muoto = kaannos;
+    }
+
+    public int getTaulukonArvo(int i, int j) {
+        return muoto[i][j];
     }
 
     public int getKoko() {
@@ -60,54 +71,11 @@ public class Laatta {
         return muoto;
     }
 
-    public int getVari() {
-        return vari;
+    public int getPelaajanID() {
+        return pelaajanID;
     }
 
-    
-    
-    
-    public void tulosta() {
-        for (int i = 0; i < muoto.length; i++) {
-            for (int j = 0; j < muoto.length; j++) {
-                System.out.print(muoto[i][j]);
-                
-            }
-            System.out.println("");
-        }
-    }
-
-    public void visualisoi() {
-        String apu = "";
-        for (int i = 0; i < muoto.length; i++) {
-            for (int j = 0; j < muoto.length; j++) {
-                if (muoto[i][j] == 3) {              
-                    apu += "#";
-                } else {
-                    apu += " ";
-                }
-            }
-            if (!apu.equals("       ")) {
-                System.out.println(apu);
-                
-            }
-            apu = "";
-        }
-
-    }
-
-    private int haeVari(String vari) {
-        switch (vari) {
-            case "sininen":
-                return 1;
-            case "keltainen":
-                return 2;
-            case "punainen":
-                return 3;
-            default:
-                return 4;
-
-        }
-                
+    public int getId() {
+        return id;
     }
 }

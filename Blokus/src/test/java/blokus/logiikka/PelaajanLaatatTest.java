@@ -26,7 +26,7 @@ public class PelaajanLaatatTest {
     
     @Before
     public void setUp() {
-        laatat = new PelaajanLaatat("sininen");
+        laatat = new PelaajanLaatat(1);
     }
     
     @After

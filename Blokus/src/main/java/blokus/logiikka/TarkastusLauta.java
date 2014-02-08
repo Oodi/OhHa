@@ -1,28 +1,38 @@
 package blokus.logiikka;
 
+import blokus.conf.GlobaalitMuuttujat;
+
+/**
+ * Jokaisella pelaajalla on oma näkökulmansa pelilaudalle, siis mihin hän
+ * voi laattansa asettaa. Tarkastus laudalta tarkastetaan voiko pelaaja asettaa
+ * laattansa tiettyyn kohtaa lautaa.
+ */
+
 public class TarkastusLauta {
 
     int[][] tLauta;
 
     public TarkastusLauta(int pelaajanId) {
-        tLauta = new int[20][20];
+        tLauta = new int[GlobaalitMuuttujat.LAUDAN_KOKO][GlobaalitMuuttujat.LAUDAN_KOKO];
         alusta(pelaajanId);
     }
 
     public boolean tarkistaVoikoLisata(Laatta laatta, int y, int x) {
         boolean laattaSalKohtaan = false;
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
+        for (int i = 0; i < GlobaalitMuuttujat.RUUDUKON_KOKO; i++) {
+            for (int j = 0; j < GlobaalitMuuttujat.RUUDUKON_KOKO; j++) {
 
-                if ((y + i - 3 < 0 || x + j - 3 < 0 || y + i - 3 > 19 || x + j - 3 > 19) && laatta.getMuoto()[i][j] == 3) {
+                if (!onkoLaudalla(y, x, i, j) && laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA) {
                     return false;
-                } else if (y + i - 3 >= 0 && x + j - 3 >= 0 && y + i - 3 < 20 && x + j - 3 < 20) {
-                    if (laatta.getMuoto()[i][j] == 2 && tLauta[y + i - 3][x + j - 3] == 2) {
+                } else if (onkoLaudalla(y, x, i, j)) {
+                    if (laatta.getMuoto()[i][j] == GlobaalitMuuttujat.KIELLETTY_ALUE && tLauta[y + i - 3][x + j - 3] == GlobaalitMuuttujat.KIELLETTY_ALUE) {
                         return false;
-                    } else if (laatta.getMuoto()[i][j] == 3 && tLauta[y + i - 3][x + j - 3] == 2) {
+                    } else if (laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA && tLauta[y + i - 3][x + j - 3] == GlobaalitMuuttujat.KIELLETTY_ALUE) {
+                        return false;
+                    }else if (laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA && tLauta[y + i - 3][x + j - 3] == GlobaalitMuuttujat.LAATTA) {
                         return false;
                     }
-                    if (laatta.getMuoto()[i][j] == 3 && tLauta[y + i - 3][x + j - 3] == 1) {
+                    if (laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA && tLauta[y + i - 3][x + j - 3] == GlobaalitMuuttujat.KULMA) {
                         laattaSalKohtaan = true;
                     }
                 }
@@ -31,11 +41,15 @@ public class TarkastusLauta {
         return laattaSalKohtaan;
     }
 
-    public void lisaaLaatta(int koodi,int y, int x) {
-        if (!(y< 0 || x < 0 || y > 19 || x  > 19)) {
+    public void lisaaLaatta(int koodi, int y, int x) {
+        if (!(y < 0 || x < 0 || y >= GlobaalitMuuttujat.LAUDAN_KOKO || x >= GlobaalitMuuttujat.LAUDAN_KOKO)) {
             tLauta[y][x] = koodi;
         }
-        
+
+    }
+
+    public boolean onkoLaudalla(int y, int x, int i, int j) {
+        return y + i - 3 >= 0 && y + i - 3 < GlobaalitMuuttujat.LAUDAN_KOKO && x + j - 3 >= 0 && x + j - 3 < GlobaalitMuuttujat.LAUDAN_KOKO;
     }
 
     private void alusta(int id) {
@@ -45,27 +59,19 @@ public class TarkastusLauta {
             }
         }
         tLauta[0][0] = 2;
-        tLauta[0][19] = 2;
-        tLauta[19][0] = 2;
-        tLauta[19][19] = 2;
+        tLauta[0][tLauta.length-1] = 2;
+        tLauta[tLauta.length-1][0] = 2;
+        tLauta[tLauta.length-1][tLauta.length-1] = 2;
         if (id == 1) {
             tLauta[0][0] = 1;
         } else if (id == 2) {
-            tLauta[0][19] = 1;
+            tLauta[0][tLauta.length-1] = 1;
         } else if (id == 3) {
-            tLauta[19][0] = 1;
+            tLauta[tLauta.length-1][0] = 1;
         } else if (id == 4) {
-            tLauta[19][19] = 1;
+            tLauta[tLauta.length-1][tLauta.length-1] = 1;
         } else {
         }
 
-    }
-    public void tulosta() {
-        for (int i = 0; i < tLauta.length; i++) {
-            for (int j = 0; j < tLauta.length; j++) {
-                System.out.print(tLauta[i][j]);
-            }
-            System.out.println("");
-        }
     }
 }

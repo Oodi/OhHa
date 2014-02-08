@@ -38,9 +38,20 @@ public class PeliLautaTest {
 
     @Test
     public void alustusToimii() {
-        assertEquals(1, lauta.lauta[0][0]);
-        assertEquals(2, lauta.lauta[0][19]);
-        assertEquals(3, lauta.lauta[19][0]);
-        assertEquals(4, lauta.lauta[19][19]);
+        int[][] arr = lauta.getLauta();
+        
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length; j++) {
+                assertEquals(0, arr[i][j]);
+                
+            }
+            
+        }
+    }
+    
+    @Test
+    public void onkoLaudallatoimii() {
+        assertTrue(lauta.onkoLaudalla(9, 9, 3, 3));
+        assertFalse(lauta.onkoLaudalla(0, 0, 2, 3));
     }
 }

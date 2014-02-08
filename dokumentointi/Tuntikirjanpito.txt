@@ -5,3 +5,7 @@
 27.1      Tuumailtu ja suunniteltu Tarkistuslaudan tarpeellisuus
 28.1      Toteutettu tarkistaminen ja laattojen asettaminen + hahmoteltu vuoron rakennetta
 30.1      Testejä, luokkakaavion päivitys, käyttöliittymän ja pariin virheen korjaus tuumintaa
+2.2       Käyttöliittymän juttujen opettelua, jokunen tunti
+6.2       Käyttöliittymän pohja, paljon bugeja 2h
+7.2       Testejä, käyttöliittymää  4h
+8.2       Testit, javadoc, käyttöliittymää bugeja (koordinaatit hukassa edelleen) 4h

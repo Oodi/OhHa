@@ -36,7 +36,7 @@ public class LaattaTest {
             {0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0}
         };
-        laatta1 = new Laatta(1, malli1, 1, "sininen");
+        laatta1 = new Laatta(1, malli1, 1, 1);
 
         malli21 = new int[][]{
             {0, 0, 0, 0, 0, 0, 0},
@@ -47,7 +47,7 @@ public class LaattaTest {
             {0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0}
         };
-        laatta21 = new Laatta(1, malli21, 1, "punainen");
+        laatta21 = new Laatta(1, malli21, 1, 2);
     }
 
     @After
@@ -89,7 +89,6 @@ public class LaattaTest {
             {0, 0, 1, 2, 1, 0, 0},
             {0, 0, 0, 0, 0, 0, 0}
         };
-        laatta21.visualisoi();
         assertArrayEquals(kaannos, laatta21.getMuoto());
     }
 
@@ -105,7 +104,6 @@ public class LaattaTest {
             {0, 1, 2, 3, 2, 0, 0},
             {0, 0, 1, 2, 1, 0, 0}
         };
-        laatta21.visualisoi();
         assertArrayEquals(laatta21.getMuoto(), kaannos);
     }
 
@@ -125,9 +123,5 @@ public class LaattaTest {
 
     }
     
-    @Test
-    public void VarinIdOikein() {
-        assertEquals(1, laatta1.vari);
-        assertEquals(3, laatta21.vari);
-    }
+
 }

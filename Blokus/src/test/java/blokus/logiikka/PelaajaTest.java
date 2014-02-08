@@ -25,7 +25,7 @@ public class PelaajaTest {
     
     @Before
     public void setUp() {
-        pelaaja1 = new Pelaaja(1, "sininen");
+        pelaaja1 = new Pelaaja(1);
     }
     
     @After

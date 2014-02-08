@@ -35,7 +35,7 @@ public class TarkastusLautaTest {
             {0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0}
         };
-        laatta = new Laatta(2, malli2, 2, "Sininen");
+        laatta = new Laatta(2, malli2, 2, 1);
     }
 
     @After
@@ -75,7 +75,6 @@ public class TarkastusLautaTest {
 
     @Test
     public void laudalleVoiLisata() {
-        testi.tulosta();
         assertTrue(testi.tarkistaVoikoLisata(laatta, 0, 1));
         testi.lisaaLaatta(1, 9, 9);
         assertTrue(testi.tarkistaVoikoLisata(laatta, 9, 9));

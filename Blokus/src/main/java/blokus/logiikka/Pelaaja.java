@@ -2,27 +2,33 @@
 package blokus.logiikka;
 
 import java.util.HashMap;
-import java.util.Map;
+/**
+ * Pelaaja luokka hallitsee pelaajan komponentteja. Ja laskee pelaajan sen
+ * hetkisen pistemäärän.
+ * 
+ */
 
 
 public class Pelaaja {
     
-    private int id;
-    
-    private String vari;
+    private int id;   
     private PelaajanLaatat laatat;
     private TarkastusLauta lauta;
+    private Laatta valittuna;
 
-    public Pelaaja(int id, String vari) {
+    public Pelaaja(int id) {
         this.id = id;        
-        this.vari = vari;
-        laatat = new PelaajanLaatat(vari);
+        laatat = new PelaajanLaatat(id);
         lauta = new TarkastusLauta(id);
- 
+        valittuna = laatat.getLaattaById(21);
     }
 
     public TarkastusLauta getLauta() {
         return lauta;
+    }
+
+    public Laatta getValittuna() {
+        return valittuna;
     }
     
     
