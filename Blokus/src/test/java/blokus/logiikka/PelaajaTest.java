@@ -39,6 +39,6 @@ public class PelaajaTest {
     
     @Test
     public void pisteetOikeinAlussa() {
-        assertEquals(8, pelaaja1.getPisteet());
+        assertEquals(89, pelaaja1.getPisteet());
     }
 }

@@ -31,6 +31,7 @@ public class Blokus {
     }
     
     public void lopetaVuoro(){
+        vuorossa.vaihdaValittuaSeuraavaan();
         pelaajat.add(vuorossa);
         aloitaVuoro();
     }

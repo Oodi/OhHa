@@ -40,9 +40,12 @@ public class LaudanHiiriKuuntelija implements MouseListener, MouseMotionListener
             paivitaVarjolautaa();
         } else {
             try {
+           
                 if (blokus.getPeliLauta().lisaaLaattaLaudalle(vuorossa.getId(), valittuna,
                         hiirenSijainti.x, hiirenSijainti.y)) {
+                    
                     liittyma.paivitaLauta();
+                   
                     blokus.lopetaVuoro();
                 }
 
@@ -99,7 +102,7 @@ public class LaudanHiiriKuuntelija implements MouseListener, MouseMotionListener
     }
 
     private void paivitaVarjolautaa() {
-        lauta.paivitaVarjoLautaa(blokus.getVuorossa().getValittuna(), hiirenSijainti.y, hiirenSijainti.x);
+        lauta.paivitaVarjoLautaa(blokus.getVuorossa().getValittuna(), hiirenSijainti.x, hiirenSijainti.y);
         liittyma.paivitaLauta();
     }
 }

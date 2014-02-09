@@ -20,7 +20,11 @@ public class Pelaaja {
         this.id = id;        
         laatat = new PelaajanLaatat(id);
         lauta = new TarkastusLauta(id);
-        valittuna = laatat.getLaattaById(21);
+        valittuna = laatat.getSeuraavaLaatta();
+    }
+    
+    public void vaihdaValittuaSeuraavaan() {
+        valittuna = laatat.getSeuraavaLaatta();
     }
 
     public TarkastusLauta getLauta() {

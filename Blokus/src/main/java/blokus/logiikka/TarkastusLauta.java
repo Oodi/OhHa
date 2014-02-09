@@ -25,9 +25,7 @@ public class TarkastusLauta {
                 if (!onkoLaudalla(y, x, i, j) && laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA) {
                     return false;
                 } else if (onkoLaudalla(y, x, i, j)) {
-                    if (laatta.getMuoto()[i][j] == GlobaalitMuuttujat.KIELLETTY_ALUE && tLauta[y + i - 3][x + j - 3] == GlobaalitMuuttujat.KIELLETTY_ALUE) {
-                        return false;
-                    } else if (laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA && tLauta[y + i - 3][x + j - 3] == GlobaalitMuuttujat.KIELLETTY_ALUE) {
+                    if (laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA && tLauta[y + i - 3][x + j - 3] == GlobaalitMuuttujat.KIELLETTY_ALUE) {
                         return false;
                     }else if (laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA && tLauta[y + i - 3][x + j - 3] == GlobaalitMuuttujat.LAATTA) {
                         return false;
@@ -66,9 +64,9 @@ public class TarkastusLauta {
             tLauta[0][0] = 1;
         } else if (id == 2) {
             tLauta[0][tLauta.length-1] = 1;
-        } else if (id == 3) {
-            tLauta[tLauta.length-1][0] = 1;
         } else if (id == 4) {
+            tLauta[tLauta.length-1][0] = 1;
+        } else if (id == 3) {
             tLauta[tLauta.length-1][tLauta.length-1] = 1;
         } else {
         }

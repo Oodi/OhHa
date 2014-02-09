@@ -47,9 +47,9 @@ public class Lauta {
 
         for (int i = 0; i < GlobaalitMuuttujat.LAUDAN_KOKO; i++) {
             for (int j = 0; j < GlobaalitMuuttujat.LAUDAN_KOKO; j++) {
-                g.setColor(getVari(lauta.getRuudunArvo(i, j)));
-                if (varjoLauta[i][j] != 0) {
-                    g.setColor(getVari(varjoLauta[i][j]));
+                g.setColor(getVari(lauta.getRuudunArvo(j, i)));
+                if (varjoLauta[j][i] != 0) {
+                    g.setColor(getVari(varjoLauta[j][i]));
                    
                 }
                 

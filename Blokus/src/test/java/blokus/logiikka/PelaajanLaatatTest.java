@@ -36,7 +36,7 @@ public class PelaajanLaatatTest {
     @Test
     public void alustusToimii() {
         
-        assertEquals(3, laatat.getJaljellaLaatat().size());
+        assertEquals(21, laatat.getJaljellaLaatat().size());
         assertEquals(0, laatat.getPelatutLaatat().size());
     }
 }

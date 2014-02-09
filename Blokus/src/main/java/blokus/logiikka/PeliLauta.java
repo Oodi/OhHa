@@ -42,6 +42,8 @@ public class PeliLauta {
                     muutaRuudunOmistaja(laatta.getPelaajanID(), y + i - 3, x + j - 3);
                 } else if (laatta.getMuoto()[i][j] == 1 && onkoLaudalla(y, x, i, j)) {
                     kasiteltava.lisaaLaatta(1, y + i - 3, x + j - 3);
+                }else if (laatta.getMuoto()[i][j] == 2 && onkoLaudalla(y, x, i, j)) {
+                    kasiteltava.lisaaLaatta(2, y + i - 3, x + j - 3);
                 }
             }
         }
