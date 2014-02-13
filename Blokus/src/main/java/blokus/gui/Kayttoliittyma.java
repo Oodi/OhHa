@@ -7,23 +7,17 @@ import blokus.gui.kuuntelijat.LaudanHiiriKuuntelija;
 import blokus.gui.kuuntelijat.OhitaVuoroKuuntelija;
 import blokus.logiikka.Blokus;
 import blokus.logiikka.Pelaaja;
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
 import java.awt.TextArea;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Queue;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
-import javax.swing.border.LineBorder;
 
 /**
  * Nimensä mukaisesti luo käyttöliittymän ja siihen tarvittavat komponentit.

@@ -25,7 +25,7 @@ public class PelaajanLaatat {
         jaljellaLaatat = new HashMap<>();
         pelatutLaatat = new HashMap<>();
         this.pelaajanID = pelaajanID;
-        laattaValitsin = GlobaalitMuuttujat.LAATTA_VALITSIMEN_ALKUTILANNE;
+        laattaValitsin = getLaattaValitimenAlkuTilanne();
         alustaLaatat();
     }
     
@@ -134,7 +134,7 @@ public class PelaajanLaatat {
      * @param id
      */
     public void palautaLaattaValitsimeen(int id) {
-        int[][] alkuperainen = GlobaalitMuuttujat.LAATTA_VALITSIMEN_ALKUTILANNE;
+        int[][] alkuperainen = getLaattaValitimenAlkuTilanne();
         if (pelatutLaatat.containsKey(id)) {
             pelatutLaatat.remove(id);
         }
@@ -157,5 +157,22 @@ public class PelaajanLaatat {
         return y >= 0 && x >= 0 && y < laattaValitsin.length && x < laattaValitsin[y].length;
     }
     
+    
+    private int[][] getLaattaValitimenAlkuTilanne(){
+        return  new int[][]{
+        {0, 0, 0, 1, 0, 0, 0, 2, 2, 0, 0, 0, 3, 3, 0, 0, 0, 4, 4, 4, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {5, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 9, 9},
+        {5, 5, 0, 0, 6, 6, 6, 0, 0, 7, 7, 7, 7, 0, 0, 8, 8, 8, 0, 0, 9, 9, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 11, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 15},
+        {10, 0, 0, 0, 0, 0, 11, 0, 0, 12, 0, 0, 0, 0, 13, 13, 13, 0, 14, 14, 14, 0, 15},
+        {10, 10, 10, 10, 0, 11, 11, 11, 0, 12, 12, 12, 0, 13, 13, 0, 0, 0, 14, 0, 0, 0, 15},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15},
+        {16, 0, 0, 0, 17, 17, 0, 18, 18, 0, 0, 0, 19, 19, 0, 0, 20, 0, 0, 0, 0, 0, 15},
+        {16, 16, 0, 17, 17, 0, 0, 18, 0, 0, 0, 19, 19, 0, 0, 20, 20, 20, 0, 0, 21, 0, 0},
+        {16, 16, 0, 17, 0, 0, 0, 18, 18, 0, 0, 0, 19, 0, 0, 0, 20, 0, 0, 21, 21, 21, 21}
+    };
+    }
     
 }
