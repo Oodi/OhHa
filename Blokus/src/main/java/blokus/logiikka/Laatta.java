@@ -16,6 +16,13 @@ public class Laatta {
     private int id;
     private int pelaajanID;
 
+    /**
+     *
+     * @param koko Laatan koko ruutuina
+     * @param muoto ennalta määrätty muoto laatalle
+     * @param id ykilöity ID laatalle
+     * @param pelaajanID laatan omistavan pelaajan ID
+     */
     public Laatta(int koko, int[][] muoto, int id, int pelaajanID) {
         this.koko = koko;
         this.muoto = muoto;
@@ -24,6 +31,9 @@ public class Laatta {
 
     }
 
+    /**
+     * Kääntää laattaa 90 astetta vasempaan
+     */
     public void kaannaVasempaan() {
         int[][] kaannos = new int[GlobaalitMuuttujat.RUUDUKON_KOKO][GlobaalitMuuttujat.RUUDUKON_KOKO];
 
@@ -35,6 +45,9 @@ public class Laatta {
         muoto = kaannos;
     }
 
+    /**
+     * Kääntää laattaa 90 astetta oikeaan
+     */
     public void kaannaOikeaan() {
         int[][] kaannos = new int[GlobaalitMuuttujat.RUUDUKON_KOKO][GlobaalitMuuttujat.RUUDUKON_KOKO];
 
@@ -48,6 +61,9 @@ public class Laatta {
 
     }
 
+    /**
+     * Kääntää laatan akselinsa ympäri
+     */
     public void kaannaYmpari() {
         int[][] kaannos = new int[GlobaalitMuuttujat.RUUDUKON_KOKO][GlobaalitMuuttujat.RUUDUKON_KOKO];
 
@@ -59,10 +75,20 @@ public class Laatta {
         muoto = kaannos;
     }
 
+    /**
+     *
+     * @param i
+     * @param j
+     * @return palauttaa parametrien määrittämän kohdan laatan muodosta
+     */
     public int getTaulukonArvo(int i, int j) {
         return muoto[i][j];
     }
 
+    /**
+     *
+     * @return
+     */
     public int getKoko() {
         return koko;
     }

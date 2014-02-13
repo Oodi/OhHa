@@ -1,5 +1,7 @@
 package blokus.logiikka;
 
+import blokus.conf.GlobaalitMuuttujat;
+import blokus.conf.LaattojenMuodot;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -12,20 +14,44 @@ public class PelaajanLaatat {
     private HashMap<Integer, Laatta> jaljellaLaatat;
     private HashMap<Integer, Laatta> pelatutLaatat;
     private int pelaajanID;
+    private int[][] laattaValitsin;
 
+    /**
+     *
+     * @param pelaajanID
+     * Luo pelaajalle laatat ja laattavalitsimen
+     */
     public PelaajanLaatat(int pelaajanID) {
         jaljellaLaatat = new HashMap<>();
         pelatutLaatat = new HashMap<>();
         this.pelaajanID = pelaajanID;
+        laattaValitsin = GlobaalitMuuttujat.LAATTA_VALITSIMEN_ALKUTILANNE;
         alustaLaatat();
-
-
+    }
+    
+    /**
+     *
+     * @param y
+     * @param x
+     * @return Palauttaa laatan ID jos sillä kohtaa valitsimessa on laatta,
+     * muuten palauttaa TYHJAN
+     */
+    public int getLaattaValitsimesta(int y, int x) {
+        if (koordinaatitOikein(y, x)) {
+        return laattaValitsin[y][x];
+    }
+        return GlobaalitMuuttujat.TYHJA;
     }
 
+    /**
+     * 
+     * @return Palauttaa automaattisesti seuraavan laatan joka on käyttämättä
+     */
     public Laatta getSeuraavaLaatta() {
         if (!jaljellaLaatat.isEmpty()) {
             for (int i = 21; i > 0; i--) {
                 if (!pelatutLaatat.containsKey(i)) {
+                    poistaLaattaValitsemesta(i);
                     return getLaattaById(i);
                 }
             }
@@ -33,229 +59,42 @@ public class PelaajanLaatat {
         return null;
     }
 
+    /**
+     *
+     * @param id
+     * @return palauttaa tietyn ID:n laatan ja lisää sen pelatuihin laattoihin
+     */
     public Laatta getLaattaById(int id) {
         Laatta laatta = jaljellaLaatat.get(id);
         pelatutLaatat.put(id, laatta);
         return laatta;
-    }
+    }    
 
-    // 0= vapaa ruutu, 1=kulma ruutu, 2 = ei sallittu ruutu, 3= laatta itse
     private void alustaLaatat() {
-        int[][] malli1 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 1, 2, 1, 0, 0},
-            {0, 0, 2, 3, 2, 0, 0},
-            {0, 0, 1, 2, 1, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli2 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 1, 2, 2, 1, 0, 0},
-            {0, 2, 3, 3, 2, 0, 0},
-            {0, 1, 2, 2, 1, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli3 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 1, 2, 2, 1, 0, 0},
-            {0, 2, 3, 3, 2, 0, 0},
-            {0, 1, 2, 3, 2, 0, 0},
-            {0, 0, 1, 2, 1, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli4 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 1, 2, 2, 2, 1, 0},
-            {0, 2, 3, 3, 3, 2, 0},
-            {0, 1, 2, 2, 2, 1, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli5 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 1, 2, 2, 1, 0, 0},
-            {0, 2, 3, 3, 2, 0, 0},
-            {0, 2, 3, 3, 2, 0, 0},
-            {0, 1, 2, 2, 1, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli6 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 1, 2, 1, 0, 0},
-            {0, 1, 2, 3, 2, 1, 0},
-            {0, 2, 3, 3, 3, 2, 0},
-            {0, 1, 2, 2, 2, 1, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli7 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {1, 2, 2, 2, 2, 1, 0},
-            {2, 3, 3, 3, 3, 2, 0},
-            {1, 2, 2, 2, 2, 1, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli8 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 1, 2, 1, 0},
-            {0, 1, 2, 2, 3, 2, 0},
-            {0, 2, 3, 3, 3, 2, 0},
-            {0, 1, 2, 2, 2, 1, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-
-        int[][] malli9 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 1, 2, 2, 1, 0},
-            {0, 1, 2, 3, 3, 2, 0},
-            {0, 2, 3, 3, 2, 1, 0},
-            {0, 1, 2, 2, 1, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli10 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 1, 2, 1, 0, 0, 0},
-            {0, 2, 3, 2, 2, 2, 1},
-            {0, 2, 3, 3, 3, 3, 2},
-            {0, 1, 2, 2, 2, 2, 1},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli11 = new int[][]{
-            {0, 0, 1, 2, 1, 0, 0},
-            {0, 0, 2, 3, 2, 0, 0},
-            {0, 1, 2, 3, 2, 1, 0},
-            {0, 2, 3, 3, 3, 2, 0},
-            {0, 1, 2, 2, 2, 1, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli12 = new int[][]{
-            {0, 0, 1, 2, 1, 0, 0},
-            {0, 0, 2, 3, 2, 0, 0},
-            {0, 0, 2, 3, 2, 2, 1},
-            {0, 0, 2, 3, 3, 3, 2},
-            {0, 0, 1, 2, 2, 2, 1},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli13 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 1, 2, 2, 2, 1},
-            {0, 1, 2, 3, 3, 3, 2},
-            {0, 2, 3, 3, 2, 2, 1},
-            {0, 1, 2, 2, 1, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli14 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 1, 2, 1, 0},
-            {0, 1, 2, 2, 3, 2, 0},
-            {0, 2, 3, 3, 3, 2, 0},
-            {0, 2, 3, 2, 2, 1, 0},
-            {0, 1, 2, 1, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli15 = new int[][]{
-            {0, 0, 1, 2, 1, 0, 0},
-            {0, 0, 2, 3, 2, 0, 0},
-            {0, 0, 2, 3, 2, 0, 0},
-            {0, 0, 2, 3, 2, 0, 0},
-            {0, 0, 2, 3, 2, 0, 0},
-            {0, 0, 2, 3, 2, 0, 0},
-            {0, 0, 1, 2, 1, 0, 0}
-        };
-        int[][] malli16 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 1, 2, 1, 0, 0, 0},
-            {0, 2, 3, 2, 1, 0, 0},
-            {0, 2, 3, 3, 2, 0, 0},
-            {0, 2, 3, 3, 2, 0, 0},
-            {0, 1, 2, 2, 1, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli17 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 1, 2, 2, 1, 0},
-            {0, 1, 2, 3, 3, 2, 0},
-            {0, 2, 3, 3, 2, 1, 0},
-            {0, 2, 3, 2, 1, 0, 0},
-            {0, 1, 2, 1, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli18 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 1, 2, 2, 1, 0},
-            {0, 0, 2, 3, 3, 2, 0},
-            {0, 0, 2, 3, 2, 1, 0},
-            {0, 0, 2, 3, 3, 2, 0},
-            {0, 0, 1, 2, 2, 1, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli19 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 1, 2, 2, 1, 0},
-            {0, 1, 2, 3, 3, 2, 0},
-            {0, 2, 3, 3, 2, 1, 0},
-            {0, 1, 2, 3, 2, 0, 0},
-            {0, 0, 1, 2, 1, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli20 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 1, 2, 1, 0, 0},
-            {0, 1, 2, 3, 2, 1, 0},
-            {0, 2, 3, 3, 3, 2, 0},
-            {0, 1, 2, 3, 2, 1, 0},
-            {0, 0, 1, 2, 1, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        int[][] malli21 = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 1, 2, 1, 0, 0, 0},
-            {1, 2, 3, 2, 2, 1, 0},
-            {2, 3, 3, 3, 3, 2, 0},
-            {1, 2, 2, 2, 2, 1, 0},
-            {0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0}
-        };
-        lisaaUusiLaatta(1, malli1, 1);
-        lisaaUusiLaatta(2, malli2, 2);
-        lisaaUusiLaatta(3, malli3, 3);
-        lisaaUusiLaatta(3, malli4, 4);
-        lisaaUusiLaatta(4, malli5, 5);
-        lisaaUusiLaatta(4, malli6, 6);
-        lisaaUusiLaatta(4, malli7, 7);
-        lisaaUusiLaatta(4, malli8, 8);
-        lisaaUusiLaatta(4, malli9, 9);
-        lisaaUusiLaatta(5, malli10, 10);
-        lisaaUusiLaatta(5, malli11, 11);
-        lisaaUusiLaatta(5, malli12, 12);
-        lisaaUusiLaatta(5, malli13, 13);
-        lisaaUusiLaatta(5, malli14, 14);
-        lisaaUusiLaatta(5, malli15, 15);
-        lisaaUusiLaatta(5, malli16, 16);
-        lisaaUusiLaatta(5, malli17, 17);
-        lisaaUusiLaatta(5, malli18, 18);
-        lisaaUusiLaatta(5, malli19, 19);
-        lisaaUusiLaatta(5, malli20, 20);
-        lisaaUusiLaatta(5, malli21, 21);
-
-
+        lisaaUusiLaatta(1, LaattojenMuodot.MALLI1, 1);
+        lisaaUusiLaatta(2, LaattojenMuodot.MALLI2, 2);
+        lisaaUusiLaatta(3, LaattojenMuodot.MALLI3, 3);
+        lisaaUusiLaatta(3, LaattojenMuodot.MALLI4, 4);
+        lisaaUusiLaatta(4, LaattojenMuodot.MALLI5, 5);
+        lisaaUusiLaatta(4, LaattojenMuodot.MALLI6, 6);
+        lisaaUusiLaatta(4, LaattojenMuodot.MALLI7, 7);
+        lisaaUusiLaatta(4, LaattojenMuodot.MALLI8, 8);
+        lisaaUusiLaatta(4, LaattojenMuodot.MALLI9, 9);
+        lisaaUusiLaatta(5, LaattojenMuodot.MALLI10, 10);
+        lisaaUusiLaatta(5, LaattojenMuodot.MALLI11, 11);
+        lisaaUusiLaatta(5, LaattojenMuodot.MALLI12, 12);
+        lisaaUusiLaatta(5, LaattojenMuodot.MALLI13, 13);
+        lisaaUusiLaatta(5, LaattojenMuodot.MALLI14, 14);
+        lisaaUusiLaatta(5, LaattojenMuodot.MALLI15, 15);
+        lisaaUusiLaatta(5, LaattojenMuodot.MALLI16, 16);
+        lisaaUusiLaatta(5, LaattojenMuodot.MALLI17, 17);
+        lisaaUusiLaatta(5, LaattojenMuodot.MALLI18, 18);
+        lisaaUusiLaatta(5, LaattojenMuodot.MALLI19, 19);
+        lisaaUusiLaatta(5, LaattojenMuodot.MALLI20, 20);
+        lisaaUusiLaatta(5, LaattojenMuodot.MALLI21, 21);
     }
     
+ 
     public void lisaaUusiLaatta(int koko, int[][] malli, int id) {
         jaljellaLaatat.put(id, new Laatta(koko,malli,id, pelaajanID));
     }
@@ -267,4 +106,56 @@ public class PelaajanLaatat {
     public HashMap<Integer, Laatta> getPelatutLaatat() {
         return pelatutLaatat;
     }
+
+    public int[][] getLaattaValitsin() {
+        return laattaValitsin;
+    }
+    
+    
+
+    /**
+     *
+     * @param id
+     */
+    public void poistaLaattaValitsemesta(int id) {
+        for (int i = 0; i < laattaValitsin.length; i++) {
+            for (int j = 0; j < laattaValitsin[i].length; j++) {
+                if (laattaValitsin[i][j] == id) {
+                    laattaValitsin[i][j] = 0;
+                }
+                
+            }
+            
+        }
+    }
+    
+    /**
+     *
+     * @param id
+     */
+    public void palautaLaattaValitsimeen(int id) {
+        int[][] alkuperainen = GlobaalitMuuttujat.LAATTA_VALITSIMEN_ALKUTILANNE;
+        if (pelatutLaatat.containsKey(id)) {
+            pelatutLaatat.remove(id);
+        }
+        for (int i = 0; i < alkuperainen.length; i++) {
+            for (int j = 0; j < alkuperainen[i].length; j++) {
+                if (alkuperainen[i][j] == id) {
+                    laattaValitsin[i][j] = id;
+                }
+                
+            }
+            
+        }
+    }
+
+    public int getPelaajanID() {
+        return pelaajanID;
+    }
+
+    private boolean koordinaatitOikein(int y, int x) {
+        return y >= 0 && x >= 0 && y < laattaValitsin.length && x < laattaValitsin[y].length;
+    }
+    
+    
 }

@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 /**
  * Visualisoi pelilaudan ja visualisoi pelilaudan yllä olevan "ilmatilan"
  */
-
 public class Lauta {
 
     private PeliLauta lauta;
@@ -22,7 +21,8 @@ public class Lauta {
         this.lauta = lauta;
         this.resoluutio = resoluutio;
         varjoLauta = new int[GlobaalitMuuttujat.LAUDAN_KOKO][GlobaalitMuuttujat.LAUDAN_KOKO];
-        alustaVarjoLauta();
+        lauta.alusta(varjoLauta);
+        
     }
 
     public void paivitaVarjoLautaa(Laatta laatta, int y, int x) {
@@ -35,13 +35,13 @@ public class Lauta {
             }
         }
     }
-    
+
     public void alustaVarjoLauta() {
         lauta.alusta(varjoLauta);
     }
 
     public BufferedImage muodostaLaudastaKuva() {
-        BufferedImage kuva = new BufferedImage(resoluutio, resoluutio, BufferedImage.TYPE_INT_RGB);
+        BufferedImage kuva = new BufferedImage(resoluutio + 1, resoluutio + 1, BufferedImage.TYPE_INT_RGB);
         int ruudunKoko = resoluutio / (GlobaalitMuuttujat.LAUDAN_KOKO);
         Graphics2D g = (Graphics2D) kuva.getGraphics();
 
@@ -50,14 +50,16 @@ public class Lauta {
                 g.setColor(getVari(lauta.getRuudunArvo(j, i)));
                 if (varjoLauta[j][i] != 0) {
                     g.setColor(getVari(varjoLauta[j][i]));
-                   
+
                 }
-                
+
                 g.fillRect(i * ruudunKoko, j * ruudunKoko, ruudunKoko, ruudunKoko);
-                g.setColor(Color.BLACK);
+                g.setColor(Color.LIGHT_GRAY);
                 g.drawRect(i * ruudunKoko, j * ruudunKoko, ruudunKoko, ruudunKoko);
             }
         }
+        g.setColor(Color.BLACK);
+        g.drawRect(0, 0, resoluutio, resoluutio);
         return kuva;
 
     }
@@ -66,18 +68,18 @@ public class Lauta {
         return new Point(pikseli.y / (resoluutio / GlobaalitMuuttujat.LAUDAN_KOKO), pikseli.x / (resoluutio / GlobaalitMuuttujat.LAUDAN_KOKO));
     }
 
-    public static Color getVari(int vari) {
+        public static Color getVari(int vari) {
         switch (vari) {
             case 1:
-                return Color.BLUE;
+                return GlobaalitMuuttujat.SININEN;
             case 2:
-                return Color.YELLOW;
+                return GlobaalitMuuttujat.KELTAINEN;
             case 3:
-                return Color.RED;
+                return GlobaalitMuuttujat.PUNAINEN;
             case 4:
-                return Color.GREEN;
+                return GlobaalitMuuttujat.VIHREA;
             default:
-                return Color.lightGray;
+                return Color.WHITE;
         }
     }
 }

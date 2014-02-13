@@ -9,3 +9,5 @@
 6.2       Käyttöliittymän pohja, paljon bugeja 2h
 7.2       Testejä, käyttöliittymää  4h
 8.2       Testit, javadoc, käyttöliittymää bugeja (koordinaatit hukassa edelleen) 4h
+10.2 -13.2     Laattavalitsinta, käyttöliittymää. Muutoksia koodiin..  8h
+

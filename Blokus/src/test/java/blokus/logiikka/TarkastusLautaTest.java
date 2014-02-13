@@ -50,9 +50,9 @@ public class TarkastusLautaTest {
     @Test
     public void alustusToimii() {
         assertEquals(1, testi.tLauta[0][0]);
-        assertEquals(2, testi.tLauta[0][19]);
-        assertEquals(2, testi.tLauta[19][0]);
-        assertEquals(2, testi.tLauta[19][19]);
+        assertEquals(0, testi.tLauta[0][19]);
+        assertEquals(0, testi.tLauta[19][0]);
+        assertEquals(0, testi.tLauta[19][19]);
     }
 
     @Test

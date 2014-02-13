@@ -46,7 +46,8 @@ public class LaudanHiiriKuuntelija implements MouseListener, MouseMotionListener
                     
                     liittyma.paivitaLauta();
                    
-                    blokus.lopetaVuoro();
+                    blokus.lopetaVuoro(false, false);
+                    liittyma.vuoroVaihtuu();
                 }
 
 

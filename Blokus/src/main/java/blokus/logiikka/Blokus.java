@@ -15,24 +15,44 @@ public class Blokus {
     private Queue<Pelaaja> pelaajat;
     private Pelaaja vuorossa;
 
+    /**
+     *
+     */
     public Blokus() {
         peliLauta = new PeliLauta();
         pelaajat = new LinkedList<>();
         lisaaPelaajat();
         aloitaVuoro();
-        //run();
-
+      
     }
     
    
     
+    /**
+     *
+     */
     public void aloitaVuoro() {
-        vuorossa = pelaajat.poll();
+        if (pelaajat.isEmpty()) {
+            
+        } else {
+            vuorossa = pelaajat.poll();
+        }
+        
     }
     
-    public void lopetaVuoro(){
-        vuorossa.vaihdaValittuaSeuraavaan();
-        pelaajat.add(vuorossa);
+    /**
+     *
+     * @param ohita
+     * @param antautuu
+     */
+    public void lopetaVuoro(Boolean ohita, Boolean antautuu){
+        if (!ohita) {
+           vuorossa.vaihdaValittuaSeuraavaan(); 
+        }
+        if (!antautuu) {
+           pelaajat.add(vuorossa); 
+        }
+        
         aloitaVuoro();
     }
 

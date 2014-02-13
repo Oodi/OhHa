@@ -42,7 +42,7 @@ public class BlokusTest {
 
     @Test
     public void vuoronLoppumisenJalkeenSamanverranPelaajiaJonossa() {
-        blokus.lopetaVuoro();
+        blokus.lopetaVuoro(false, false);
         assertEquals(3, blokus.getPelaajat().size());
         assertTrue(blokus.getVuorossa() != null);
     }
