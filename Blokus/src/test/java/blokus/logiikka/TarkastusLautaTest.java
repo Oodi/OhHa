@@ -57,30 +57,30 @@ public class TarkastusLautaTest {
 
     @Test
     public void laudanOhiEiVoiLisata() {
-        assertFalse(testi.tarkistaVoikoLisata(laatta, 0, -1));
-        assertFalse(testi.tarkistaVoikoLisata(laatta, 0, 0));
-        assertFalse(testi.tarkistaVoikoLisata(laatta, -1, 3));
-        assertFalse(testi.tarkistaVoikoLisata(laatta, 20, 20));
-        assertFalse(testi.tarkistaVoikoLisata(laatta, 0, 20));
+        assertFalse(testi.tarkistaVoikoLisata(laatta, 0, -1).isEmpty());
+        assertFalse(testi.tarkistaVoikoLisata(laatta, 0, 0).isEmpty());
+        assertFalse(testi.tarkistaVoikoLisata(laatta, -1, 3).isEmpty());
+        assertFalse(testi.tarkistaVoikoLisata(laatta, 20, 20).isEmpty());
+        assertFalse(testi.tarkistaVoikoLisata(laatta, 0, 20).isEmpty());
     }
 
     @Test
     public void minneSattuuEiVoiLisata() {
-        assertFalse(testi.tarkistaVoikoLisata(laatta, 13, 13));
-        assertFalse(testi.tarkistaVoikoLisata(laatta, 0, 19));
-        assertFalse(testi.tarkistaVoikoLisata(laatta, 19, 1));
-        assertFalse(testi.tarkistaVoikoLisata(laatta, 19, 19));
-        assertFalse(testi.tarkistaVoikoLisata(laatta, 7, 13));
+        assertFalse(testi.tarkistaVoikoLisata(laatta, 13, 13).isEmpty());
+        assertFalse(testi.tarkistaVoikoLisata(laatta, 0, 19).isEmpty());
+        assertFalse(testi.tarkistaVoikoLisata(laatta, 19, 1).isEmpty());
+        assertFalse(testi.tarkistaVoikoLisata(laatta, 19, 19).isEmpty());
+        assertFalse(testi.tarkistaVoikoLisata(laatta, 7, 13).isEmpty());
     }
 
     @Test
     public void laudalleVoiLisata() {
-        assertTrue(testi.tarkistaVoikoLisata(laatta, 0, 1));
+        assertTrue(testi.tarkistaVoikoLisata(laatta, 0, 1).isEmpty());
         testi.lisaaLaatta(1, 9, 9);
-        assertTrue(testi.tarkistaVoikoLisata(laatta, 9, 9));
+        assertTrue(testi.tarkistaVoikoLisata(laatta, 9, 9).isEmpty());
         testi.lisaaLaatta(1, 7, 7);
         testi.lisaaLaatta(1, 7, 6);
-        assertTrue(testi.tarkistaVoikoLisata(laatta, 7, 7));
+        assertTrue(testi.tarkistaVoikoLisata(laatta, 7, 7).isEmpty());
     }
     
     
