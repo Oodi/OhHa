@@ -28,21 +28,22 @@ public class TarkastusLauta {
      * @param x
      * @return
      */
-    public boolean tarkistaVoikoLisata(Laatta laatta, int y, int x) {
-        boolean laattaSalKohtaan = false;
+    public String tarkistaVoikoLisata(Laatta laatta, int y, int x) {
+        String laattaSalKohtaan = " Laatan tulee olla kulmittain jo laitettuun nähden tai aloitus kulmassa!";
         for (int i = 0; i < GlobaalitMuuttujat.RUUDUKON_KOKO; i++) {
             for (int j = 0; j < GlobaalitMuuttujat.RUUDUKON_KOKO; j++) {
 
                 if (!onkoLaudalla(y, x, i, j) && laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA) {
-                    return false;
+                    
+                    return " Laatan tulee olla kokonaan laudalla!";
                 } else if (onkoLaudalla(y, x, i, j)) {
                     if (laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA && tLauta[y + i - 3][x + j - 3] == GlobaalitMuuttujat.KIELLETTY_ALUE) {
-                        return false;
+                        return " Laattan sivu ei saa koskea jo asetettuun laattaan!";
                     }else if (laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA && tLauta[y + i - 3][x + j - 3] == GlobaalitMuuttujat.LAATTA) {
-                        return false;
+                        return " Laattaa ei voi asettaa jo asetetun laatan päälle!";
                     }
                     if (laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA && tLauta[y + i - 3][x + j - 3] == GlobaalitMuuttujat.KULMA) {
-                        laattaSalKohtaan = true;
+                        laattaSalKohtaan = "";
                     }
                 }
             }

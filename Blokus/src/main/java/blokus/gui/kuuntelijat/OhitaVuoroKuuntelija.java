@@ -23,6 +23,7 @@ public class OhitaVuoroKuuntelija implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         blokus.lopetaVuoro(GlobaalitMuuttujat.OHITA_VUORO,false);
+        liittyma.lisaaTeksti(" Pelaaja ohittu vuoron.");
         liittyma.vuoroVaihtuu();
     }
     

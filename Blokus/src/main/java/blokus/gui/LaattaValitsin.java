@@ -69,10 +69,10 @@ public class LaattaValitsin {
 
     }
 
-    public BufferedImage muodostaTyhjaKuva() {
+    public BufferedImage muodostaTyhjaKuva(Color color) {
         BufferedImage kuva = new BufferedImage(GlobaalitMuuttujat.PIENEN_VALITSIMEN_RESOLUUTIO -16, GlobaalitMuuttujat.PIENEN_VALITSIMEN_RESOLUUTIO /2 -4, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = (Graphics2D) kuva.getGraphics();
-        g.setColor(Color.WHITE);
+        g.setColor(color);
         g.fillRect(0, 0, GlobaalitMuuttujat.PIENEN_VALITSIMEN_RESOLUUTIO -16, GlobaalitMuuttujat.PIENEN_VALITSIMEN_RESOLUUTIO /2 -4);
         return kuva;
     }
@@ -82,7 +82,7 @@ public class LaattaValitsin {
             case 1:
                 return GlobaalitMuuttujat.SININEN;
             case 2:
-                return GlobaalitMuuttujat.KELTAINEN;
+                return GlobaalitMuuttujat.VIOLETTI;
             case 3:
                 return GlobaalitMuuttujat.PUNAINEN;
             case 4:

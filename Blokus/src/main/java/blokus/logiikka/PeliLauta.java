@@ -5,19 +5,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Pelilaudalle sijoitetaan laatat. Pelilauta esittää laattojen omistajat. 
+ * Pelilaudalle sijoitetaan laatat. Pelilauta esittää laattojen omistajat.
  * Pelilauta päivittää myös pelaajien tarkastus laudat oikeanlaisiksi.
  */
-
 public class PeliLauta {
 
     private int[][] lauta;
     private HashMap<Integer, TarkastusLauta> tarkastusLaudat;
+    private String tuoreinVirheTeksti;
 
     /**
      * Luo vakio kokoisen pelilaudan ja alustaa sen.
      */
     public PeliLauta() {
+        this.tuoreinVirheTeksti = "";
         lauta = new int[GlobaalitMuuttujat.LAUDAN_KOKO][GlobaalitMuuttujat.LAUDAN_KOKO];
         alusta(lauta);
         tarkastusLaudat = new HashMap<>();
@@ -34,11 +35,13 @@ public class PeliLauta {
      */
     public boolean lisaaLaattaLaudalle(int pelaajaId, Laatta laatta, int y, int x) {
         TarkastusLauta kasiteltava = tarkastusLaudat.get(pelaajaId);
-        if (kasiteltava.tarkistaVoikoLisata(laatta, y, x)) {
+        String onnistuuko = kasiteltava.tarkistaVoikoLisata(laatta, y, x);
+        if (onnistuuko.isEmpty()) {
             lisaaLaatta(kasiteltava, laatta, y, x);
+            setTuoreinVirheTeksti("");
             return true;
         } else {
-            System.out.println("Et voi asettaa laattaa tähän");    // muutosta tulossa..
+            setTuoreinVirheTeksti(onnistuuko);
             return false;
         }
 
@@ -53,7 +56,7 @@ public class PeliLauta {
                     muutaRuudunOmistaja(laatta.getPelaajanID(), y + i - 3, x + j - 3);
                 } else if (laatta.getMuoto()[i][j] == GlobaalitMuuttujat.KULMA && onkoLaudalla(y, x, i, j)) {
                     kasiteltava.lisaaLaatta(1, y + i - 3, x + j - 3);
-                }else if (laatta.getMuoto()[i][j] == GlobaalitMuuttujat.KIELLETTY_ALUE && onkoLaudalla(y, x, i, j)) {
+                } else if (laatta.getMuoto()[i][j] == GlobaalitMuuttujat.KIELLETTY_ALUE && onkoLaudalla(y, x, i, j)) {
                     kasiteltava.lisaaLaatta(2, y + i - 3, x + j - 3);
                 }
             }
@@ -76,14 +79,12 @@ public class PeliLauta {
      *
      * @param pelaajaId
      * @param y
-     * @param x
-     * Muuttaa ruudun omistajuuden halutun pelaajan haltuun
+     * @param x Muuttaa ruudun omistajuuden halutun pelaajan haltuun
      */
     public void muutaRuudunOmistaja(int pelaajaId, int y, int x) {
         this.lauta[y][x] = pelaajaId;
     }
 
-  
     public void lisaaTarkastusLauta(int id, TarkastusLauta l) {
         tarkastusLaudat.put(id, l);
     }
@@ -98,8 +99,7 @@ public class PeliLauta {
 
     /**
      *
-     * @param alustettava
-     * Alustaa laudat kokonsa perustuen
+     * @param alustettava Alustaa laudat kokonsa perustuen
      */
     public void alusta(int[][] alustettava) {
         for (int i = 0; i < alustettava.length; i++) {
@@ -117,8 +117,15 @@ public class PeliLauta {
         return lauta;
     }
 
-
     public int getRuudunArvo(int y, int x) {
         return lauta[y][x];
+    }
+
+    public String getVirheTeksti() {
+        return tuoreinVirheTeksti;
+    }
+
+    public void setTuoreinVirheTeksti(String tuoreinVirheTeksti) {
+        this.tuoreinVirheTeksti = tuoreinVirheTeksti;
     }
 }

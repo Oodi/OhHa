@@ -66,13 +66,13 @@ public class Pelaaja {
      * @return sen hetkinen pistemäärä
      */
     public int getPisteet() {
-        HashMap<Integer, Laatta> apu = laatat.getJaljellaLaatat();
+        HashMap<Integer, Laatta> apu = laatat.getPelatutLaatat();
         int pisteet = 0;
         for (Laatta laatta : apu.values()) {
             pisteet += laatta.getKoko();
 
         }
-        return pisteet;
+        return 89 - pisteet;
     }
 
     public int getId() {

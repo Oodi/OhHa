@@ -45,9 +45,11 @@ public class LaudanHiiriKuuntelija implements MouseListener, MouseMotionListener
                         hiirenSijainti.x, hiirenSijainti.y)) {
                     
                     liittyma.paivitaLauta();
-                   
+                    liittyma.lisaaTeksti(" Pelaaja ansaitsi " +blokus.getVuorossa().getValittuna().getKoko() +" pistettä!");
                     blokus.lopetaVuoro(false, false);
                     liittyma.vuoroVaihtuu();
+                } else {
+                    liittyma.lisaaTeksti(blokus.getPeliLauta().getVirheTeksti());
                 }
 
 
@@ -94,12 +96,16 @@ public class LaudanHiiriKuuntelija implements MouseListener, MouseMotionListener
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
+
         if (e.getWheelRotation() > 0) {
             blokus.getVuorossa().getValittuna().kaannaOikeaan();
-        } else {
+        } else  {
             blokus.getVuorossa().getValittuna().kaannaVasempaan();
         }
-        paivitaVarjolautaa();
+        if (hiirenSijainti != null) {
+            paivitaVarjolautaa();
+        }
+        
     }
 
     private void paivitaVarjolautaa() {

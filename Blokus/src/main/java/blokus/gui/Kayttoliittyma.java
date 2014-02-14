@@ -7,17 +7,28 @@ import blokus.gui.kuuntelijat.LaudanHiiriKuuntelija;
 import blokus.gui.kuuntelijat.OhitaVuoroKuuntelija;
 import blokus.logiikka.Blokus;
 import blokus.logiikka.Pelaaja;
+import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.TextArea;
 import java.awt.image.BufferedImage;
 import java.util.Queue;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
+import javax.swing.text.DefaultCaret;
 
 /**
  * Nimensä mukaisesti luo käyttöliittymän ja siihen tarvittavat komponentit.
@@ -46,9 +57,13 @@ public class Kayttoliittyma extends JFrame {
     private ImageIcon miniLaattaKuva3;
     //
     private JPanel oikeaKeskiPaneeli;
+    private Label pelaaja1Pisteet;
+    private Label pelaaja2Pisteet;
+    private Label pelaaja3Pisteet;
+    private Label pelaaja4Pisteet;
     //
     private JPanel oikeaAlaPaneeli;
-    private TextArea tekstialue;
+    private JTextArea tekstialue;
     private JButton ohitaVuoroNappi;
     private JButton antauduNappi;
     //
@@ -91,7 +106,7 @@ public class Kayttoliittyma extends JFrame {
         laattaLabel.addMouseListener(lKuuntelija);
         laattaLabel.addMouseMotionListener(lKuuntelija);
         laattaPaneeli.add(laattaLabel);
-        
+
 
         miniLaattaKuva1 = new ImageIcon(laatat.muodostaPieniValitsimestaKuva(blokus.getVuorossa().getLaatat()));
         miniLaattaKuva2 = new ImageIcon(laatat.muodostaPieniValitsimestaKuva(blokus.getVuorossa().getLaatat()));
@@ -111,42 +126,89 @@ public class Kayttoliittyma extends JFrame {
         oikeaYlaPaneeli.add(paneeli3);
         oikeaYlaPaneeli.setAlignmentY(JPanel.BOTTOM_ALIGNMENT);
         oikeaYlaPaneeli.setLayout(new BoxLayout(oikeaYlaPaneeli, BoxLayout.PAGE_AXIS));
-        
-        oikeaKeskiPaneeli.setPreferredSize(new Dimension(200, 230));
-        
-        tekstialue = new TextArea();
-        tekstialue.setEditable(false);
-        tekstialue.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        tekstialue.setPreferredSize(new Dimension(200, 100));
-        oikeaAlaPaneeli.add(tekstialue);
 
+
+
+
+        oikeaKeskiPaneeli.setLayout(new GridLayout(5, 2));
+        oikeaKeskiPaneeli.setBorder(new LineBorder(Color.BLACK));
+        Label pelaaja1 = new Label("Sininen: ");
+        pelaaja1Pisteet = new Label("" + blokus.getPelaajanPisteet(1));
+        pelaaja1.setForeground(GlobaalitMuuttujat.SININEN);
+        Label pelaaja2 = new Label("Oranssi: ");
+        pelaaja2Pisteet = new Label("" + blokus.getPelaajanPisteet(1));
+        pelaaja2.setForeground(GlobaalitMuuttujat.VIOLETTI);
+        Label pelaaja3 = new Label("Punainen: ");
+        pelaaja3Pisteet = new Label("" + blokus.getPelaajanPisteet(1));
+        pelaaja3.setForeground(GlobaalitMuuttujat.PUNAINEN);
+        Label pelaaja4 = new Label("Vihreä: ");
+        pelaaja4Pisteet = new Label("" + blokus.getPelaajanPisteet(1));
+        pelaaja4.setForeground(GlobaalitMuuttujat.VIHREA);
+        Label pisteet = new Label("Pisteet: ");
+        pisteet.setFont(new Font("test", Font.BOLD, 15));
+        oikeaKeskiPaneeli.add(pisteet);
+        oikeaKeskiPaneeli.add(new Label(""));
+        oikeaKeskiPaneeli.add(pelaaja1);
+        oikeaKeskiPaneeli.add(pelaaja1Pisteet);
+        oikeaKeskiPaneeli.add(pelaaja2);
+        oikeaKeskiPaneeli.add(pelaaja2Pisteet);
+        oikeaKeskiPaneeli.add(pelaaja3);
+        oikeaKeskiPaneeli.add(pelaaja3Pisteet);
+        oikeaKeskiPaneeli.add(pelaaja4);
+        oikeaKeskiPaneeli.add(pelaaja4Pisteet);
+        oikeaKeskiPaneeli.setPreferredSize(new Dimension(190, 100));
+
+        tekstialue = new JTextArea();
+        tekstialue.setText("Peli alkaa. \nAloita omasta kulmastasi. "
+                + "\nLaatta saa koskea vain kulmittain\njo asettamaasi laattaan nähden. "
+                + "\nSe jolla on lopussa vähiten pisteitä voittaa pelin.\nOnnea peliin!");
+        tekstialue.setEditable(false);
+
+        oikeaAlaPaneeli.add(new Label("Tapahtumat: "));
+        tekstialue.setWrapStyleWord(true);
+        tekstialue.setLineWrap(true);
+        JScrollPane scroll = new JScrollPane(tekstialue);
+        scroll.setVerticalScrollBarPolicy(
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setPreferredSize(new Dimension(190, 120));
+
+        DefaultCaret caret = (DefaultCaret) tekstialue.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        
+        oikeaAlaPaneeli.add(scroll);
+
+        oikeaAlaPaneeli.add(Box.createRigidArea(new Dimension(0, 4)));
+        JPanel napit = new JPanel();
         ohitaVuoroNappi = new JButton("Ohita vuoro");
-        ohitaVuoroNappi.setPreferredSize(new Dimension(120, 30));
+        ohitaVuoroNappi.setPreferredSize(new Dimension(100, 30));
         ohitaVuoroNappi.setAlignmentX(JButton.CENTER_ALIGNMENT);
         ohitaVuoroNappi.addActionListener(new OhitaVuoroKuuntelija(blokus, this));
-        oikeaAlaPaneeli.add(ohitaVuoroNappi);
-
+        napit.add(ohitaVuoroNappi);        
+        
         antauduNappi = new JButton("Antaudu");
-        antauduNappi.setPreferredSize(new Dimension(120, 30));
+        antauduNappi.setPreferredSize(new Dimension(85, 30));
         antauduNappi.setAlignmentX(JButton.CENTER_ALIGNMENT);
         antauduNappi.addActionListener(new AntautumisKuuntelija(blokus, this));
-        oikeaAlaPaneeli.add(antauduNappi);
+        napit.add(antauduNappi);
+        oikeaAlaPaneeli.add(napit);
         oikeaAlaPaneeli.setLayout(new BoxLayout(oikeaAlaPaneeli, BoxLayout.PAGE_AXIS));
 
         vasenPaneeli.add(lautaPaneeli);
-        vasenPaneeli.add(laattaPaneeli);     
-        vasenPaneeli.setLayout(new BoxLayout(vasenPaneeli, BoxLayout.PAGE_AXIS));
-        
+        vasenPaneeli.add(laattaPaneeli);
+        vasenPaneeli.setLayout(new BoxLayout(vasenPaneeli, BoxLayout.Y_AXIS));
+
         oikeaPaneeli.add(oikeaYlaPaneeli);
+        oikeaPaneeli.add(Box.createRigidArea(new Dimension(0, 5)));
         oikeaPaneeli.add(oikeaKeskiPaneeli);
+        oikeaPaneeli.add(Box.createRigidArea(new Dimension(0, 5)));
         oikeaPaneeli.add(oikeaAlaPaneeli);
-        oikeaPaneeli.setAlignmentY(JPanel.TOP_ALIGNMENT);
-        oikeaPaneeli.setLayout(new BoxLayout(oikeaPaneeli, BoxLayout.PAGE_AXIS));
+
+        oikeaPaneeli.setLayout(new BoxLayout(oikeaPaneeli, BoxLayout.Y_AXIS));
 
         paaPaneeli.add(vasenPaneeli);
-        paaPaneeli.add(oikeaPaneeli);   
+        paaPaneeli.add(oikeaPaneeli);
         getContentPane().add(paaPaneeli);
-        
+
         pack();
         setResizable(false);
         setVisible(true);
@@ -165,8 +227,27 @@ public class Kayttoliittyma extends JFrame {
     public void vuoroVaihtuu() {
         laatat.setLaatat(blokus.getVuorossa().getLaatat());
         muodostaPienetValitsimet();
+        paivitaPisteTekstit();
         paivitaLaatat();
         paivitaLauta();
+        lisaaTeksti("--------------------------------------------");
+        lisaaTeksti(" On " + blokus.getVuorossa().getId() + ". pelaajan vuoro.");
+    }
+
+    public void lisaaTeksti(String teksti) {
+        String nykyinen = tekstialue.getText();
+        if (!teksti.isEmpty()) {
+            tekstialue.setText(nykyinen + "\n-" + teksti);
+        }
+        
+    }
+
+    private void paivitaPisteTekstit() {
+        pelaaja1Pisteet.setText("" + blokus.getPelaajanPisteet(1));
+        pelaaja2Pisteet.setText("" + blokus.getPelaajanPisteet(2));
+        pelaaja3Pisteet.setText("" + blokus.getPelaajanPisteet(3));
+        pelaaja4Pisteet.setText("" + blokus.getPelaajanPisteet(4));
+
     }
 
     private void muodostaPienetValitsimet() {
@@ -187,20 +268,20 @@ public class Kayttoliittyma extends JFrame {
             Pelaaja p2 = jono.poll();
             miniLaattaKuva1.setImage(laatat.muodostaPieniValitsimestaKuva(p1.getLaatat()));
             miniLaattaKuva2.setImage(laatat.muodostaPieniValitsimestaKuva(p2.getLaatat()));
-            miniLaattaKuva3.setImage(laatat.muodostaTyhjaKuva());
+            miniLaattaKuva3.setImage(laatat.muodostaTyhjaKuva(getBackground()));
             jono.add(p1);
             jono.add(p2);
 
         } else if (jono.size() == 1) {
             Pelaaja p1 = jono.poll();
             miniLaattaKuva1.setImage(laatat.muodostaPieniValitsimestaKuva(p1.getLaatat()));
-            miniLaattaKuva2.setImage(laatat.muodostaTyhjaKuva());
-            miniLaattaKuva3.setImage(laatat.muodostaTyhjaKuva());
+            miniLaattaKuva2.setImage(laatat.muodostaTyhjaKuva(getBackground()));
+            miniLaattaKuva3.setImage(laatat.muodostaTyhjaKuva(getBackground()));
             jono.add(p1);
         } else {
-            miniLaattaKuva1.setImage(laatat.muodostaTyhjaKuva());
-            miniLaattaKuva2.setImage(laatat.muodostaTyhjaKuva());
-            miniLaattaKuva3.setImage(laatat.muodostaTyhjaKuva());
+            miniLaattaKuva1.setImage(laatat.muodostaTyhjaKuva(getBackground()));
+            miniLaattaKuva2.setImage(laatat.muodostaTyhjaKuva(getBackground()));
+            miniLaattaKuva3.setImage(laatat.muodostaTyhjaKuva(getBackground()));
         }
 
         miniLaattaLabel1.repaint();

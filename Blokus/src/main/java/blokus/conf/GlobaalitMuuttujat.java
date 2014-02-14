@@ -18,14 +18,14 @@ public abstract class GlobaalitMuuttujat {
     public static final boolean ANTAUDU = true;
     public static final boolean OHITA_VUORO = true;
     //
-    public static final int LAUDAN_RESOLUUTIO = 500;
+    public static final int LAUDAN_RESOLUUTIO = 400;
     public static final int VALITSIMEN_RESOLUUTIO = 400;
     public static final int PIENEN_VALITSIMEN_RESOLUUTIO = 200;
     //
-    public static final Color SININEN = Color.BLUE;
-    public static final Color KELTAINEN = Color.ORANGE;
-    public static final Color PUNAINEN = Color.red;
-    public static final Color VIHREA = Color.green;
+    public static final Color SININEN = new Color(0, 157, 162);
+    public static final Color VIOLETTI = new Color(250, 150, 0);
+    public static final Color PUNAINEN = new Color(154, 5, 0);
+    public static final Color VIHREA = Color.getHSBColor(0.35f, 0.8f, 0.40f);
     //
 
 }

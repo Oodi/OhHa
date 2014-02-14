@@ -16,13 +16,18 @@ public class Lauta {
     private PeliLauta lauta;
     private int resoluutio;
     private int[][] varjoLauta;
+    private int[][] kulmat;
+    
 
     public Lauta(PeliLauta lauta, int resoluutio) {
         this.lauta = lauta;
         this.resoluutio = resoluutio;
         varjoLauta = new int[GlobaalitMuuttujat.LAUDAN_KOKO][GlobaalitMuuttujat.LAUDAN_KOKO];
+        kulmat = new int[GlobaalitMuuttujat.LAUDAN_KOKO][GlobaalitMuuttujat.LAUDAN_KOKO];
         lauta.alusta(varjoLauta);
-        
+        lauta.alusta(kulmat);
+        alustaKulmat();
+
     }
 
     public void paivitaVarjoLautaa(Laatta laatta, int y, int x) {
@@ -54,8 +59,12 @@ public class Lauta {
                 }
 
                 g.fillRect(i * ruudunKoko, j * ruudunKoko, ruudunKoko, ruudunKoko);
+                if (kulmat[j][i] != 0) {
+                    g.setColor(getVari(kulmat[j][i]));
+                    g.fillRect(i * ruudunKoko+ruudunKoko/2-ruudunKoko/4, j * ruudunKoko+ruudunKoko/2-ruudunKoko/4, ruudunKoko/2, ruudunKoko/2);
+                }
                 g.setColor(Color.LIGHT_GRAY);
-                g.drawRect(i * ruudunKoko, j * ruudunKoko, ruudunKoko, ruudunKoko);
+                g.drawRect(i * ruudunKoko , j * ruudunKoko, ruudunKoko, ruudunKoko);
             }
         }
         g.setColor(Color.BLACK);
@@ -68,12 +77,12 @@ public class Lauta {
         return new Point(pikseli.y / (resoluutio / GlobaalitMuuttujat.LAUDAN_KOKO), pikseli.x / (resoluutio / GlobaalitMuuttujat.LAUDAN_KOKO));
     }
 
-        public static Color getVari(int vari) {
+    public static Color getVari(int vari) {
         switch (vari) {
             case 1:
                 return GlobaalitMuuttujat.SININEN;
             case 2:
-                return GlobaalitMuuttujat.KELTAINEN;
+                return GlobaalitMuuttujat.VIOLETTI;
             case 3:
                 return GlobaalitMuuttujat.PUNAINEN;
             case 4:
@@ -81,5 +90,14 @@ public class Lauta {
             default:
                 return Color.WHITE;
         }
+    }
+
+
+
+    private void alustaKulmat() {
+        kulmat[0][0] = 1;
+        kulmat[0][19] = 2;
+        kulmat[19][0] = 4;
+        kulmat[19][19] = 3;
     }
 }

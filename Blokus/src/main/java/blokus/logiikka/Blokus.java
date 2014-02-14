@@ -5,15 +5,15 @@ import java.util.Queue;
 import java.util.Scanner;
 
 /**
- * Luo peliin tarvittavat komponentit. Hallinnoi vuoronvaihtoa ja välittää tietoa
- * eteenpäin.
+ * Luo peliin tarvittavat komponentit. Hallinnoi vuoronvaihtoa ja välittää
+ * tietoa eteenpäin.
  */
-
 public class Blokus {
 
     private PeliLauta peliLauta;
     private Queue<Pelaaja> pelaajat;
     private Pelaaja vuorossa;
+    private int[] pelaajienPisteet;
 
     /**
      *
@@ -21,41 +21,41 @@ public class Blokus {
     public Blokus() {
         peliLauta = new PeliLauta();
         pelaajat = new LinkedList<>();
+        pelaajienPisteet = new int[4];
         lisaaPelaajat();
+        alustaPelaajienPisteet();
         aloitaVuoro();
-      
+
     }
-    
-   
-    
+
     /**
      *
      */
     public void aloitaVuoro() {
         if (pelaajat.isEmpty()) {
-            
         } else {
             vuorossa = pelaajat.poll();
         }
-        
+
     }
-    
+
     /**
      *
      * @param ohita
      * @param antautuu
      */
-    public void lopetaVuoro(Boolean ohita, Boolean antautuu){
+    public void lopetaVuoro(Boolean ohita, Boolean antautuu) {
+
         if (!ohita) {
-           vuorossa.vaihdaValittuaSeuraavaan(); 
+            paivitaVuoroaLopettavanPisteet();
+            vuorossa.vaihdaValittuaSeuraavaan();
         }
         if (!antautuu) {
-           pelaajat.add(vuorossa); 
+            pelaajat.add(vuorossa);
         }
-        
+
         aloitaVuoro();
     }
-
 
     private void lisaaPelaajat() {
         Pelaaja pelaaja1 = new Pelaaja(1);
@@ -73,6 +73,21 @@ public class Blokus {
 
     }
 
+    private void alustaPelaajienPisteet() {
+        for (int i = 0; i < pelaajienPisteet.length; i++) {
+            pelaajienPisteet[i] = 89;
+
+        }
+    }
+
+    public void paivitaVuoroaLopettavanPisteet() {
+        pelaajienPisteet[vuorossa.getId() - 1] = vuorossa.getPisteet();
+    }
+
+    public int getPelaajanPisteet(int pelaajanID) {
+        return pelaajienPisteet[pelaajanID - 1];
+    }
+
     public PeliLauta getPeliLauta() {
         return peliLauta;
     }
@@ -84,6 +99,4 @@ public class Blokus {
     public Pelaaja getVuorossa() {
         return vuorossa;
     }
-    
-    
 }
