@@ -34,7 +34,7 @@ public class Blokus {
         pelaajienPisteet = new HashMap<>();
         lisaaPelaajat();
         alustaPelaajienPisteet();
-        aloitaVuoro();
+        
 
     }
 

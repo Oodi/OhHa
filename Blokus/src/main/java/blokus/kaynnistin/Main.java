@@ -4,12 +4,12 @@ import blokus.gui.Kayttoliittyma;
 import blokus.logiikka.Blokus;
 
 
-public class Kaynnistin 
+public class Main 
 {
     public static void main( String[] args )
     {
-        Blokus peli = new Blokus();
-        
+        Blokus peli = new Blokus();    
+        peli.aloitaVuoro();
         Kayttoliittyma g = new Kayttoliittyma(peli);
         
     }
