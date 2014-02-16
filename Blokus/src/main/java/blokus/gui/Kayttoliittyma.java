@@ -358,11 +358,13 @@ public class Kayttoliittyma extends JFrame {
         oikeaAlaPaneeli.add(Box.createRigidArea(new Dimension(0, 4)));
         JPanel napit = new JPanel();
         ohitaVuoroNappi = new JButton("Ohita vuoro");
+        ohitaVuoroNappi.setFont(new Font("Arial", Font.PLAIN, 13));
         ohitaVuoroNappi.setPreferredSize(new Dimension(100, 30));
         ohitaVuoroNappi.setAlignmentX(JButton.CENTER_ALIGNMENT);
         ohitaVuoroNappi.addActionListener(new OhitaVuoroKuuntelija(blokus, this));
         napit.add(ohitaVuoroNappi);
         antauduNappi = new JButton("Antaudu");
+        antauduNappi.setFont(new Font("Arial", Font.PLAIN, 13));
         antauduNappi.setPreferredSize(new Dimension(85, 30));
         antauduNappi.setAlignmentX(JButton.CENTER_ALIGNMENT);
         antauduNappi.addActionListener(new AntautumisKuuntelija(blokus, this));
