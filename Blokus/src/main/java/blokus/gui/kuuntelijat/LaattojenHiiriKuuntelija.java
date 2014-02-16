@@ -8,7 +8,12 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import sun.misc.GC;
+
+
+/**
+ * Kuuntelee hiirtä, kun hiiri on laatta valitsimen yläpuolella. Havaitsee 
+ * laattojen vaihtamis klikkaukset ja vaihtaa valittuna olevaa laattaa.
+ */
 
 public class LaattojenHiiriKuuntelija implements MouseListener, MouseMotionListener {
 

@@ -1,11 +1,13 @@
 
 package blokus.gui.kuuntelijat;
 
-import blokus.gui.Kayttoliittyma;
-import blokus.gui.Lauta;
 import blokus.logiikka.Blokus;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+/**
+ * Kuuntelee näppäimistön nuolinäppäimiä ja kääntää valittua laattaa.
+ */
 
 
 public class LaudanNappaimistoKuuntelija extends KeyAdapter {
@@ -17,9 +19,7 @@ public class LaudanNappaimistoKuuntelija extends KeyAdapter {
         this.blokus = blokus;   
         this.hiiri = hiiri;
     }
-    
-    
-
+        
     @Override
     public void keyTyped(KeyEvent e) {
     }

@@ -49,15 +49,12 @@ public class Lauta {
         BufferedImage kuva = new BufferedImage(resoluutio + 1, resoluutio + 1, BufferedImage.TYPE_INT_RGB);
         int ruudunKoko = resoluutio / (GlobaalitMuuttujat.LAUDAN_KOKO);
         Graphics2D g = (Graphics2D) kuva.getGraphics();
-
         for (int i = 0; i < GlobaalitMuuttujat.LAUDAN_KOKO; i++) {
             for (int j = 0; j < GlobaalitMuuttujat.LAUDAN_KOKO; j++) {
                 g.setColor(getVari(lauta.getRuudunArvo(j, i)));
                 if (varjoLauta[j][i] != 0) {
                     g.setColor(getVari(varjoLauta[j][i]));
-
                 }
-
                 g.fillRect(i * ruudunKoko, j * ruudunKoko, ruudunKoko, ruudunKoko);
                 if (kulmat[j][i] != 0 && lauta.getRuudunArvo(j, i) == 0) {
                     g.setColor(getVari(kulmat[j][i]));
@@ -77,15 +74,15 @@ public class Lauta {
         return new Point(pikseli.y / (resoluutio / GlobaalitMuuttujat.LAUDAN_KOKO), pikseli.x / (resoluutio / GlobaalitMuuttujat.LAUDAN_KOKO));
     }
 
-    public static Color getVari(int vari) {
+    private static Color getVari(int vari) {
         switch (vari) {
-            case 1:
+            case GlobaalitMuuttujat.SININEN:
                 return GlobaalitMuuttujat.SININEN_VARI;
-            case 2:
+            case GlobaalitMuuttujat.ORANSSI:
                 return GlobaalitMuuttujat.ORANSSI_VARI;
-            case 3:
+            case GlobaalitMuuttujat.PUNAINEN:
                 return GlobaalitMuuttujat.PUNAINEN_VARI;
-            case 4:
+            case GlobaalitMuuttujat.VIHREA:
                 return GlobaalitMuuttujat.VIHREA_VARI;
             default:
                 return Color.WHITE;
@@ -93,12 +90,11 @@ public class Lauta {
     }
     
 
-
-
     private void alustaKulmat() {
         kulmat[0][0] = 1;
         kulmat[0][19] = 2;
-        kulmat[19][0] = 4;
         kulmat[19][19] = 3;
+        kulmat[19][0] = 4;
+        
     }
 }

@@ -1,5 +1,10 @@
 package blokus.conf;
 
+/**
+ * Sisältää kaikki laatat ja niiden muodot.
+ */
+
+
 public class LaattojenMuodot {
 
     public static final int[][] MALLI1 = new int[][]{

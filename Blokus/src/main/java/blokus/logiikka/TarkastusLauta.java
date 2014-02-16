@@ -32,7 +32,7 @@ public class TarkastusLauta {
      * lisääminen onnistuu
      */
     public String tarkistaVoikoLisata(Laatta laatta, int y, int x) {
-        String laattaSalKohtaan = " Laatan tulee olla kulmittain jo laitettuun nähden tai aloitus kulmassa!";
+        String laattaSalKohtaan = " Laatan tulee olla kulmittain jo asetettuun nähden!";
         for (int i = 0; i < GlobaalitMuuttujat.RUUDUKON_KOKO; i++) {
             for (int j = 0; j < GlobaalitMuuttujat.RUUDUKON_KOKO; j++) {
                 if (!onkoLaudalla(y, x, i, j) && laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA) {                   

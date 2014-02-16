@@ -7,7 +7,7 @@ import java.awt.Color;
  */
 public abstract class GlobaalitMuuttujat {
 
-    public static final int LAUDAN_KOKO = 20;
+    public static final int LAUDAN_KOKO = 20;  // 20x20
     public static final int RUUDUKON_KOKO = 7; // 7x7
     //
     public static final int LAATTA = 3;

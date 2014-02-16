@@ -67,7 +67,7 @@ public class Pelaaja {
         return 89 - pisteet;
     }
 
-    public int gePelaajantID() {
+    public int getPelaajantID() {
         return pelaajanID;
     }
 

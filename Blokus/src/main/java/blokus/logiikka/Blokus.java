@@ -82,7 +82,7 @@ public class Blokus {
      * Päivittää HashMappiin pelaajan sen hetkiset pisteet.
      */
     public void paivitaVuoroaLopettavanPisteet() {
-        pelaajienPisteet.put(vuorossa.gePelaajantID(), vuorossa.getPisteet());
+        pelaajienPisteet.put(vuorossa.getPelaajantID(), vuorossa.getPisteet());
     }
 
     /**

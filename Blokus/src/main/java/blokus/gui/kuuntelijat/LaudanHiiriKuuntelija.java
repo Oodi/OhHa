@@ -38,24 +38,18 @@ public class LaudanHiiriKuuntelija implements MouseListener, MouseMotionListener
         if (e.getButton() == MouseEvent.BUTTON3) {
             valittuna.kaannaYmpari();
             paivitaVarjolautaa();
-        } else {
-           
-                if (blokus.getPeliLauta().lisaaLaattaLaudalle(vuorossa.gePelaajantID(), valittuna,
-                        hiirenSijainti.x, hiirenSijainti.y)) {
-                    
+        } else {         
+                if (blokus.getPeliLauta().lisaaLaattaLaudalle(vuorossa.getPelaajantID(), valittuna,
+                        hiirenSijainti.x, hiirenSijainti.y)) {                    
                     liittyma.paivitaLauta();
-                    liittyma.lisaaTeksti(" Pelaaja ansaitsi " +blokus.getVuorossa().getValittuna().getKoko() +" pistettä!");
+                    liittyma.lisaaTeksti(" " + blokus.getIDVariTekstina(blokus.getVuorossa().getPelaajantID()) 
+                            + " ansaitsi " +blokus.getVuorossa().getValittuna().getKoko() +" pistettä!");
                     blokus.lopetaVuoro(false, false);
                     liittyma.vuoroVaihtuu();
                 } else {
                     liittyma.lisaaTeksti(blokus.getPeliLauta().getVirheTeksti());
                 }
-
-
-
         }
-
-
     }
 
     @Override

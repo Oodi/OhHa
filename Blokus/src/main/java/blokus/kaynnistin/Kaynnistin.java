@@ -1,14 +1,12 @@
-package javalabra.blokus;
+package blokus.kaynnistin;
 
 import blokus.gui.Kayttoliittyma;
 import blokus.logiikka.Blokus;
-import blokus.logiikka.Pelaaja;
-import blokus.logiikka.PelaajanLaatat;
 
 
-public class App 
+public class Kaynnistin 
 {
-    public static void main( String[] args ) throws Exception
+    public static void main( String[] args )
     {
         Blokus peli = new Blokus();
         Kayttoliittyma g = new Kayttoliittyma(peli);
