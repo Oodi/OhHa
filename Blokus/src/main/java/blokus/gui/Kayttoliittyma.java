@@ -4,9 +4,11 @@ import blokus.conf.GlobaalitMuuttujat;
 import blokus.gui.kuuntelijat.AntautumisKuuntelija;
 import blokus.gui.kuuntelijat.LaattojenHiiriKuuntelija;
 import blokus.gui.kuuntelijat.LaudanHiiriKuuntelija;
+import blokus.gui.kuuntelijat.LaudanNappaimistoKuuntelija;
 import blokus.gui.kuuntelijat.OhitaVuoroKuuntelija;
 import blokus.logiikka.Blokus;
 import blokus.logiikka.Pelaaja;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Cursor;
@@ -16,18 +18,22 @@ import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.TextArea;
 import java.awt.image.BufferedImage;
+import java.util.Map;
 import java.util.Queue;
+import java.util.TreeMap;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
 import javax.swing.text.DefaultCaret;
 
 /**
@@ -72,8 +78,9 @@ public class Kayttoliittyma extends JFrame {
     private LaattaValitsin laatat;
 
     public Kayttoliittyma(Blokus blokus) {
+        super("Blokus");
         this.blokus = blokus;
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     
         valmisteleKayttoliittyma();
     }
 
@@ -94,6 +101,9 @@ public class Kayttoliittyma extends JFrame {
         lautaLabel.addMouseListener(kuuntelija);
         lautaLabel.addMouseMotionListener(kuuntelija);
         lautaLabel.addMouseWheelListener(kuuntelija);
+        LaudanNappaimistoKuuntelija nKuuntelija = new LaudanNappaimistoKuuntelija(blokus, kuuntelija);
+        lautaLabel.addKeyListener(nKuuntelija);
+        lautaLabel.setFocusable(true);
         lautaPaneeli.add(lautaLabel);
 
         laattaPaneeli = new JPanel();
@@ -134,18 +144,18 @@ public class Kayttoliittyma extends JFrame {
         oikeaKeskiPaneeli.setBorder(new LineBorder(Color.BLACK));
         Label pelaaja1 = new Label("Sininen: ");
         pelaaja1Pisteet = new Label("" + blokus.getPelaajanPisteet(1));
-        pelaaja1.setForeground(GlobaalitMuuttujat.SININEN);
+        pelaaja1.setForeground(GlobaalitMuuttujat.SININEN_VARI);
         Label pelaaja2 = new Label("Oranssi: ");
         pelaaja2Pisteet = new Label("" + blokus.getPelaajanPisteet(1));
-        pelaaja2.setForeground(GlobaalitMuuttujat.VIOLETTI);
+        pelaaja2.setForeground(GlobaalitMuuttujat.ORANSSI_VARI);
         Label pelaaja3 = new Label("Punainen: ");
         pelaaja3Pisteet = new Label("" + blokus.getPelaajanPisteet(1));
-        pelaaja3.setForeground(GlobaalitMuuttujat.PUNAINEN);
+        pelaaja3.setForeground(GlobaalitMuuttujat.PUNAINEN_VARI);
         Label pelaaja4 = new Label("Vihreä: ");
         pelaaja4Pisteet = new Label("" + blokus.getPelaajanPisteet(1));
-        pelaaja4.setForeground(GlobaalitMuuttujat.VIHREA);
+        pelaaja4.setForeground(GlobaalitMuuttujat.VIHREA_VARI);
         Label pisteet = new Label("Pisteet: ");
-        pisteet.setFont(new Font("test", Font.BOLD, 15));
+        pisteet.setFont(new Font("Arial", Font.BOLD, 15));
         oikeaKeskiPaneeli.add(pisteet);
         oikeaKeskiPaneeli.add(new Label(""));
         oikeaKeskiPaneeli.add(pelaaja1);
@@ -163,8 +173,9 @@ public class Kayttoliittyma extends JFrame {
                 + "\nLaatta saa koskea vain kulmittain\njo asettamaasi laattaan nähden. "
                 + "\nSe jolla on lopussa vähiten pisteitä voittaa pelin.\nOnnea peliin!");
         tekstialue.setEditable(false);
-
-        oikeaAlaPaneeli.add(new Label("Tapahtumat: "));
+        Label tapahtumat = new Label("Tapahtumat: ");
+        tapahtumat.setFont(new Font("Arial", Font.BOLD, 15));
+        oikeaAlaPaneeli.add(tapahtumat);
         tekstialue.setWrapStyleWord(true);
         tekstialue.setLineWrap(true);
         JScrollPane scroll = new JScrollPane(tekstialue);
@@ -174,7 +185,7 @@ public class Kayttoliittyma extends JFrame {
 
         DefaultCaret caret = (DefaultCaret) tekstialue.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-        
+
         oikeaAlaPaneeli.add(scroll);
 
         oikeaAlaPaneeli.add(Box.createRigidArea(new Dimension(0, 4)));
@@ -183,8 +194,8 @@ public class Kayttoliittyma extends JFrame {
         ohitaVuoroNappi.setPreferredSize(new Dimension(100, 30));
         ohitaVuoroNappi.setAlignmentX(JButton.CENTER_ALIGNMENT);
         ohitaVuoroNappi.addActionListener(new OhitaVuoroKuuntelija(blokus, this));
-        napit.add(ohitaVuoroNappi);        
-        
+        napit.add(ohitaVuoroNappi);
+
         antauduNappi = new JButton("Antaudu");
         antauduNappi.setPreferredSize(new Dimension(85, 30));
         antauduNappi.setAlignmentX(JButton.CENTER_ALIGNMENT);
@@ -209,7 +220,7 @@ public class Kayttoliittyma extends JFrame {
         paaPaneeli.add(oikeaPaneeli);
         getContentPane().add(paaPaneeli);
 
-        pack();
+        pack();      
         setResizable(false);
         setVisible(true);
     }
@@ -225,13 +236,18 @@ public class Kayttoliittyma extends JFrame {
     }
 
     public void vuoroVaihtuu() {
-        laatat.setLaatat(blokus.getVuorossa().getLaatat());
-        muodostaPienetValitsimet();
-        paivitaPisteTekstit();
-        paivitaLaatat();
-        paivitaLauta();
-        lisaaTeksti("--------------------------------------------");
-        lisaaTeksti(" On " + blokus.getVuorossa().getId() + ". pelaajan vuoro.");
+        if (blokus.onkoPeliOhi) {
+            peliLoppuu();
+        } else {
+            laatat.setLaatat(blokus.getVuorossa().getLaatat());
+            muodostaPienetValitsimet();
+            paivitaPisteTekstit();
+            paivitaLaatat();
+            paivitaLauta();
+            lisaaTeksti("--------------------------------------------");
+            lisaaTeksti(" " +blokus.getIDVariTekstina(blokus.getVuorossa().gePelaajantID()) + " pelaaja on vuorossa.");
+        }
+
     }
 
     public void lisaaTeksti(String teksti) {
@@ -239,7 +255,7 @@ public class Kayttoliittyma extends JFrame {
         if (!teksti.isEmpty()) {
             tekstialue.setText(nykyinen + "\n-" + teksti);
         }
-        
+
     }
 
     private void paivitaPisteTekstit() {
@@ -288,5 +304,68 @@ public class Kayttoliittyma extends JFrame {
         miniLaattaLabel2.repaint();
         miniLaattaLabel3.repaint();
 
+    }
+
+    private void peliLoppuu() {
+        getContentPane().removeAll();
+
+
+        JPanel loppuTulokset = new JPanel();
+        loppuTulokset.setLayout(new GridLayout(0, 4, 0, 0));
+        JLabel loppu = new JLabel("LOPPUTULOKSET", JLabel.CENTER);
+        loppu.setFont(new Font("Arial", Font.BOLD, 30));
+        TreeMap<Integer, Integer> tulokset = blokus.getLopputulokset();
+        int sija = 0;
+        int edellinen = 100;
+        JLabel sijoitus;
+        JLabel pelaaja;
+        JLabel tulos;
+        
+        for (Map.Entry<Integer, Integer> entry : tulokset.entrySet()) {
+            if (entry.getValue() != edellinen) {
+                sija++;
+                sijoitus = new JLabel(sija + ".");
+            } else {
+                sijoitus = new JLabel("");
+            }
+            pelaaja = new JLabel(blokus.getIDVariTekstina(entry.getKey()));
+            tulos = new JLabel("" + entry.getValue());
+            tulos.setFont(new Font("Arial", Font.BOLD, 18));
+            pelaaja.setFont(new Font("Arial", Font.BOLD, 18));
+            sijoitus.setFont(new Font("Arial", Font.BOLD, 18));
+            tulos.setForeground(getVari(entry.getKey()));
+            pelaaja.setForeground(getVari(entry.getKey()));
+            loppuTulokset.add(sijoitus);
+            loppuTulokset.add(pelaaja);
+            loppuTulokset.add(new JLabel("   "));
+            loppuTulokset.add(tulos);
+            edellinen = entry.getValue();
+        }
+        JPanel loppuTuloksetMaster = new JPanel();
+        loppuTuloksetMaster.setLayout(new GridLayout(2, 1, 0, 0));
+
+        loppuTuloksetMaster.add(loppu);
+        loppuTuloksetMaster.add(loppuTulokset);
+        loppuTuloksetMaster.setPreferredSize(new Dimension(350, 300));
+        getContentPane().add(loppuTuloksetMaster);
+        repaint();
+        pack();
+        setVisible(true);
+
+    }
+
+    public Color getVari(int iD) {
+        switch (iD) {
+            case 1:
+                return GlobaalitMuuttujat.SININEN_VARI;
+            case 2:
+                return GlobaalitMuuttujat.ORANSSI_VARI;
+            case 3:
+                return GlobaalitMuuttujat.PUNAINEN_VARI;
+            case 4:
+                return GlobaalitMuuttujat.VIHREA_VARI;
+            default:
+                return Color.BLACK;
+        }
     }
 }

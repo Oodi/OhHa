@@ -22,19 +22,20 @@ public class TarkastusLauta {
     }
 
     /**
-     * Muutoksia tulossa...
+     * Metodi tarkistaa tarkistus laudasta onnistuuko laatan lisääminen 
+     * kyseiseen kohtaan. Siis että laatta on kulmittain edelliseen nähden ja 
+     * muutenkin sääntöjen mukaan asetettu.
      * @param laatta
      * @param y
      * @param x
-     * @return
+     * @return Virheteksin jos lisääminen ei onnistu tai tyhjän tekstin jos 
+     * lisääminen onnistuu
      */
     public String tarkistaVoikoLisata(Laatta laatta, int y, int x) {
         String laattaSalKohtaan = " Laatan tulee olla kulmittain jo laitettuun nähden tai aloitus kulmassa!";
         for (int i = 0; i < GlobaalitMuuttujat.RUUDUKON_KOKO; i++) {
             for (int j = 0; j < GlobaalitMuuttujat.RUUDUKON_KOKO; j++) {
-
-                if (!onkoLaudalla(y, x, i, j) && laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA) {
-                    
+                if (!onkoLaudalla(y, x, i, j) && laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA) {                   
                     return " Laatan tulee olla kokonaan laudalla!";
                 } else if (onkoLaudalla(y, x, i, j)) {
                     if (laatta.getMuoto()[i][j] == GlobaalitMuuttujat.LAATTA && tLauta[y + i - 3][x + j - 3] == GlobaalitMuuttujat.KIELLETTY_ALUE) {
@@ -52,7 +53,7 @@ public class TarkastusLauta {
     }
 
     /**
-     *
+     * Muuttaa halutun koodin tarkastus laudalle. 
      * @param koodi
      * @param y
      * @param x
@@ -65,6 +66,14 @@ public class TarkastusLauta {
     }
 
 
+    /**
+     *
+     * @param y
+     * @param x
+     * @param i
+     * @param j
+     * @return Palauttaa true jos kohta on tarkastus laudan sisäpuolella.
+     */
     public boolean onkoLaudalla(int y, int x, int i, int j) {
         return y + i - 3 >= 0 && y + i - 3 < GlobaalitMuuttujat.LAUDAN_KOKO && x + j - 3 >= 0 && x + j - 3 < GlobaalitMuuttujat.LAUDAN_KOKO;
     }
@@ -84,6 +93,5 @@ public class TarkastusLauta {
         } else if (id == 3) {
             tLauta[tLauta.length-1][tLauta.length-1] = 1;
         } 
-
     }
 }

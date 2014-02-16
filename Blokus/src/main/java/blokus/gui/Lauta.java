@@ -59,7 +59,7 @@ public class Lauta {
                 }
 
                 g.fillRect(i * ruudunKoko, j * ruudunKoko, ruudunKoko, ruudunKoko);
-                if (kulmat[j][i] != 0) {
+                if (kulmat[j][i] != 0 && lauta.getRuudunArvo(j, i) == 0) {
                     g.setColor(getVari(kulmat[j][i]));
                     g.fillRect(i * ruudunKoko+ruudunKoko/2-ruudunKoko/4, j * ruudunKoko+ruudunKoko/2-ruudunKoko/4, ruudunKoko/2, ruudunKoko/2);
                 }
@@ -80,17 +80,18 @@ public class Lauta {
     public static Color getVari(int vari) {
         switch (vari) {
             case 1:
-                return GlobaalitMuuttujat.SININEN;
+                return GlobaalitMuuttujat.SININEN_VARI;
             case 2:
-                return GlobaalitMuuttujat.VIOLETTI;
+                return GlobaalitMuuttujat.ORANSSI_VARI;
             case 3:
-                return GlobaalitMuuttujat.PUNAINEN;
+                return GlobaalitMuuttujat.PUNAINEN_VARI;
             case 4:
-                return GlobaalitMuuttujat.VIHREA;
+                return GlobaalitMuuttujat.VIHREA_VARI;
             default:
                 return Color.WHITE;
         }
     }
+    
 
 
 

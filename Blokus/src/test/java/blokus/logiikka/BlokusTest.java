@@ -49,8 +49,18 @@ public class BlokusTest {
 
     @Test
     public void pelaajiaVastaaOikeaMaaraTarkastusLautoja() {
-        
+
         assertEquals(4, blokus.getPeliLauta().getTarkastusLaudat().size());
-        
+
+    }
+
+    @Test
+    public void varilleLoytyyTekstit() {
+
+        assertEquals("Sininen", blokus.getIDVariTekstina(1));
+        assertEquals("Oranssi", blokus.getIDVariTekstina(2));
+        assertEquals("Punainen", blokus.getIDVariTekstina(3));
+        assertEquals("Vihreä", blokus.getIDVariTekstina(4));
+
     }
 }

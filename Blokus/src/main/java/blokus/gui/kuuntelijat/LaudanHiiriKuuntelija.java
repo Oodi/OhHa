@@ -39,9 +39,8 @@ public class LaudanHiiriKuuntelija implements MouseListener, MouseMotionListener
             valittuna.kaannaYmpari();
             paivitaVarjolautaa();
         } else {
-            try {
            
-                if (blokus.getPeliLauta().lisaaLaattaLaudalle(vuorossa.getId(), valittuna,
+                if (blokus.getPeliLauta().lisaaLaattaLaudalle(vuorossa.gePelaajantID(), valittuna,
                         hiirenSijainti.x, hiirenSijainti.y)) {
                     
                     liittyma.paivitaLauta();
@@ -53,8 +52,7 @@ public class LaudanHiiriKuuntelija implements MouseListener, MouseMotionListener
                 }
 
 
-            } catch (Exception ex) {
-            }
+
         }
 
 
@@ -102,14 +100,16 @@ public class LaudanHiiriKuuntelija implements MouseListener, MouseMotionListener
         } else  {
             blokus.getVuorossa().getValittuna().kaannaVasempaan();
         }
-        if (hiirenSijainti != null) {
+       
             paivitaVarjolautaa();
-        }
+        
         
     }
 
-    private void paivitaVarjolautaa() {
+    public void paivitaVarjolautaa() {
+        if (hiirenSijainti != null) {
         lauta.paivitaVarjoLautaa(blokus.getVuorossa().getValittuna(), hiirenSijainti.x, hiirenSijainti.y);
         liittyma.paivitaLauta();
+        }
     }
 }

@@ -22,10 +22,13 @@ public abstract class GlobaalitMuuttujat {
     public static final int VALITSIMEN_RESOLUUTIO = 400;
     public static final int PIENEN_VALITSIMEN_RESOLUUTIO = 200;
     //
-    public static final Color SININEN = new Color(0, 157, 162);
-    public static final Color VIOLETTI = new Color(250, 150, 0);
-    public static final Color PUNAINEN = new Color(154, 5, 0);
-    public static final Color VIHREA = Color.getHSBColor(0.35f, 0.8f, 0.40f);
+    public static final Color SININEN_VARI = new Color(0, 157, 162);
+    public static final Color ORANSSI_VARI = new Color(250, 150, 0);
+    public static final Color PUNAINEN_VARI = new Color(154, 5, 0);
+    public static final Color VIHREA_VARI = Color.getHSBColor(0.35f, 0.8f, 0.40f);
     //
-
+    public static final int SININEN = 1;
+    public static final int ORANSSI = 2;
+    public static final int PUNAINEN = 3;
+    public static final int VIHREA = 4;
 }

@@ -10,21 +10,23 @@ import java.util.HashMap;
  */
 public class Pelaaja {
 
-    private int id;
+    private int pelaajanID;
     private PelaajanLaatat laatat;
-    private TarkastusLauta lauta;
+    private TarkastusLauta tarkastusLauta;
+    /**
+     * Tällähetkellä "kädessä" oleva laatta
+     */
     private Laatta valittuna;
 
     /**
-     *
-     * @param id määrittää ID:n pelaajalle
-     * Luo pelaajalle laatat ja tarkastus laudan 
-     * ja ottaa pelaajan käteen ensimmäisen laatan
+     * Määrittää ID:n pelaajalle Luo pelaajalle laatat ja tarkastus
+     * laudan ja ottaa pelaajan käteen ensimmäisen laatan.
+     * @param id 
      */
-    public Pelaaja(int id) {
-        this.id = id;
-        laatat = new PelaajanLaatat(id);
-        lauta = new TarkastusLauta(id);
+    public Pelaaja(int pelaajanID) {
+        this.pelaajanID = pelaajanID;
+        laatat = new PelaajanLaatat(pelaajanID);
+        tarkastusLauta = new TarkastusLauta(pelaajanID);
         valittuna = laatat.getSeuraavaLaatta();
     }
 
@@ -37,9 +39,8 @@ public class Pelaaja {
 
     /**
      *
-     * @param y 
-     * @param x
-     * Vaihtaa valittua laattaa laattavalitsimesta löytyvään laattaan
+     * @param y
+     * @param x Vaihtaa valittua laattaa laattavalitsimesta löytyvään laattaan
      * koordinaattien perusteella.
      */
     public void vaihdaValittuaLaattaa(int y, int x) {
@@ -48,21 +49,12 @@ public class Pelaaja {
             laatat.palautaLaattaValitsimeen(valittuna.getId());
             laatat.poistaLaattaValitsemesta(laattaId);
             valittuna = laatat.getLaattaById(laattaId);
-            
         }
-        
-    }
-
-    public TarkastusLauta getLauta() {
-        return lauta;
-    }
-
-    public Laatta getValittuna() {
-        return valittuna;
     }
 
     /**
      * Hakee pelaajan sen hetkisen pistemäärän
+     *
      * @return sen hetkinen pistemäärä
      */
     public int getPisteet() {
@@ -75,11 +67,19 @@ public class Pelaaja {
         return 89 - pisteet;
     }
 
-    public int getId() {
-        return id;
+    public int gePelaajantID() {
+        return pelaajanID;
     }
 
     public PelaajanLaatat getLaatat() {
         return laatat;
+    }
+
+    public TarkastusLauta getTarkastusLauta() {
+        return tarkastusLauta;
+    }
+
+    public Laatta getValittuna() {
+        return valittuna;
     }
 }

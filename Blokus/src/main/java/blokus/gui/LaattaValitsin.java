@@ -80,13 +80,13 @@ public class LaattaValitsin {
     public static Color getVari(int vari) {
         switch (vari) {
             case 1:
-                return GlobaalitMuuttujat.SININEN;
+                return GlobaalitMuuttujat.SININEN_VARI;
             case 2:
-                return GlobaalitMuuttujat.VIOLETTI;
+                return GlobaalitMuuttujat.ORANSSI_VARI;
             case 3:
-                return GlobaalitMuuttujat.PUNAINEN;
+                return GlobaalitMuuttujat.PUNAINEN_VARI;
             case 4:
-                return GlobaalitMuuttujat.VIHREA;
+                return GlobaalitMuuttujat.VIHREA_VARI;
             default:
                 return Color.lightGray;
         }

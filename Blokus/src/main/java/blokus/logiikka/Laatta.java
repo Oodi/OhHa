@@ -13,7 +13,7 @@ public class Laatta {
      
     private int koko;
     private int[][] muoto;
-    private int id;
+    private int laatanID;
     private int pelaajanID;
 
     /**
@@ -23,10 +23,10 @@ public class Laatta {
      * @param id ykilöity ID laatalle
      * @param pelaajanID laatan omistavan pelaajan ID
      */
-    public Laatta(int koko, int[][] muoto, int id, int pelaajanID) {
+    public Laatta(int koko, int[][] muoto, int laatanID, int pelaajanID) {
         this.koko = koko;
         this.muoto = muoto;
-        this.id = id;
+        this.laatanID = laatanID;
         this.pelaajanID = pelaajanID;
 
     }
@@ -62,14 +62,14 @@ public class Laatta {
     }
 
     /**
-     * Kääntää laatan akselinsa ympäri
+     * Kääntää laatan Y akselinsa ympäri
      */
     public void kaannaYmpari() {
         int[][] kaannos = new int[GlobaalitMuuttujat.RUUDUKON_KOKO][GlobaalitMuuttujat.RUUDUKON_KOKO];
 
         for (int i = 0; i < GlobaalitMuuttujat.RUUDUKON_KOKO; i++) {
             for (int j = 0; j < GlobaalitMuuttujat.RUUDUKON_KOKO; j++) {
-                kaannos[GlobaalitMuuttujat.RUUDUKON_KOKO - i - 1][j] = muoto[i][j];
+                kaannos[i][GlobaalitMuuttujat.RUUDUKON_KOKO - j - 1] = muoto[i][j];
             }
         }
         muoto = kaannos;
@@ -85,10 +85,6 @@ public class Laatta {
         return muoto[i][j];
     }
 
-    /**
-     *
-     * @return
-     */
     public int getKoko() {
         return koko;
     }
@@ -102,6 +98,6 @@ public class Laatta {
     }
 
     public int getId() {
-        return id;
+        return laatanID;
     }
 }

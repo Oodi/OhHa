@@ -26,12 +26,15 @@ public class PeliLauta {
     }
 
     /**
-     *
+     * Metodi kysyy tarkistuslaudalta voiko laatan lisätä kyseiseen kohtaa,
+     * jos voi niin aloittaa laatan lisäämisen. Jos taas ei, niin asettaa 
+     * virhetekstin, joka kuvaa miksi lisääminen tähän kohtaan ei onnistu.
+     * 
      * @param pelaajaId
      * @param laatta
      * @param y
      * @param x
-     * @return Palauttaa true, jos laatan lisääminen onnistuu, muuten false
+     * @return Palauttaa true, jos laatan lisääminen onnistui, muuten false
      */
     public boolean lisaaLaattaLaudalle(int pelaajaId, Laatta laatta, int y, int x) {
         TarkastusLauta kasiteltava = tarkastusLaudat.get(pelaajaId);
@@ -85,6 +88,7 @@ public class PeliLauta {
         this.lauta[y][x] = pelaajaId;
     }
 
+  
     public void lisaaTarkastusLauta(int id, TarkastusLauta l) {
         tarkastusLaudat.put(id, l);
     }

@@ -1,4 +1,3 @@
-
 package blokus.gui.kuuntelijat;
 
 import blokus.conf.GlobaalitMuuttujat;
@@ -7,9 +6,8 @@ import blokus.logiikka.Blokus;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class AntautumisKuuntelija implements ActionListener {
-    
+
     Blokus blokus;
     Kayttoliittyma liittyma;
 
@@ -20,9 +18,8 @@ public class AntautumisKuuntelija implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        liittyma.lisaaTeksti(" " + blokus.getIDVariTekstina(blokus.getVuorossa().gePelaajantID()) + " Pelaaja antautui!");
         blokus.lopetaVuoro(GlobaalitMuuttujat.OHITA_VUORO, GlobaalitMuuttujat.ANTAUDU);
-        liittyma.lisaaTeksti(" Pelaaja antautui!");
         liittyma.vuoroVaihtuu();
     }
-    
 }
