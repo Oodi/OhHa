@@ -9,8 +9,10 @@ import blokus.gui.kuuntelijat.OhitaVuoroKuuntelija;
 import blokus.logiikka.Blokus;
 import blokus.logiikka.Pelaaja;
 import java.awt.Color;
+import java.awt.ContainerOrderFocusTraversalPolicy;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.FocusTraversalPolicy;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
@@ -28,6 +30,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.LayoutFocusTraversalPolicy;
 import javax.swing.border.LineBorder;
 import javax.swing.text.DefaultCaret;
 
@@ -345,12 +348,16 @@ public class Kayttoliittyma extends JFrame {
         oikeaAlaPaneeli.add(tapahtumat);
         tekstialue.setWrapStyleWord(true);
         tekstialue.setLineWrap(true);
+        tekstialue.setFocusable(false);
         JScrollPane scroll = new JScrollPane(tekstialue);
         scroll.setVerticalScrollBarPolicy(
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setPreferredSize(new Dimension(190, 120));
+        scroll.setPreferredSize(new Dimension(190, 120));       
         DefaultCaret caret = (DefaultCaret) tekstialue.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        scroll.setFocusable(false);
+        scroll.getVerticalScrollBar().setFocusable(false);
+        oikeaAlaPaneeli.setFocusable(false);
         oikeaAlaPaneeli.add(scroll);
     }
 
@@ -362,12 +369,14 @@ public class Kayttoliittyma extends JFrame {
         ohitaVuoroNappi.setPreferredSize(new Dimension(100, 30));
         ohitaVuoroNappi.setAlignmentX(JButton.CENTER_ALIGNMENT);
         ohitaVuoroNappi.addActionListener(new OhitaVuoroKuuntelija(blokus, this));
+        ohitaVuoroNappi.setFocusable(false);
         napit.add(ohitaVuoroNappi);
         antauduNappi = new JButton("Antaudu");
         antauduNappi.setFont(new Font("Arial", Font.PLAIN, 13));
         antauduNappi.setPreferredSize(new Dimension(85, 30));
         antauduNappi.setAlignmentX(JButton.CENTER_ALIGNMENT);
         antauduNappi.addActionListener(new AntautumisKuuntelija(blokus, this));
+        antauduNappi.setFocusable(false);
         napit.add(antauduNappi);
         oikeaAlaPaneeli.add(napit);
         oikeaAlaPaneeli.setLayout(new BoxLayout(oikeaAlaPaneeli, BoxLayout.PAGE_AXIS));
