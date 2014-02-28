@@ -9,10 +9,8 @@ import blokus.gui.kuuntelijat.OhitaVuoroKuuntelija;
 import blokus.logiikka.Blokus;
 import blokus.logiikka.Pelaaja;
 import java.awt.Color;
-import java.awt.ContainerOrderFocusTraversalPolicy;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.FocusTraversalPolicy;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
@@ -30,13 +28,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.LayoutFocusTraversalPolicy;
 import javax.swing.border.LineBorder;
 import javax.swing.text.DefaultCaret;
 
 /**
  * Nimensä mukaisesti luo käyttöliittymän ja siihen tarvittavat komponentit.
  * Päivittää myös käyttöliittymää tarpeen mukaan.
+ * 
+ * @author Simo Auvinen
  */
 public class Kayttoliittyma extends JFrame {
 
@@ -75,13 +74,23 @@ public class Kayttoliittyma extends JFrame {
     private Lauta lauta;
     private LaattaValitsin laatat;
 
+    /**
+     * Aloittaa käyttäliittymän valmistelun
+     *
+     * @param blokus
+     */
     public Kayttoliittyma(Blokus blokus) {
         super("Blokus");
         this.blokus = blokus;
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         valmisteleKayttoliittyma();
     }
 
+    /**
+     * Valmistelee käyttöliittymän
+     *
+     *
+     */
     private void valmisteleKayttoliittyma() {
         paaPaneeli = new JPanel();
         oikeaYlaPaneeli = new JPanel();
@@ -112,21 +121,30 @@ public class Kayttoliittyma extends JFrame {
         paaPaneeli.add(oikeaPaneeli);
         getContentPane().add(paaPaneeli);
 
-        pack();      
+        pack();
         setResizable(false);
         setVisible(true);
     }
 
+    /**
+     * Päivittää pelilautaa esittävän kuvan
+     */
     public void paivitaLauta() {
         laudanKuva.setImage(lauta.muodostaLaudastaKuva());
         lautaLabel.repaint();
     }
 
+    /**
+     * Päivittää käytössä olevia laattoja esittävän kuvan
+     */
     public void paivitaLaatat() {
         laattaKuva.setImage(laatat.muodostaValitsimestaKuva());
         laattaLabel.repaint();
     }
 
+    /**
+     * Vaihtaa vuoroa vaihtamalla esiin seuraavan pelaajan komponentit
+     */
     public void vuoroVaihtuu() {
         if (blokus.onkoPeliOhi) {
             peliLoppuu();
@@ -137,11 +155,16 @@ public class Kayttoliittyma extends JFrame {
             paivitaLaatat();
             paivitaLauta();
             lisaaTeksti("--------------------------------------------");
-            lisaaTeksti(" " +blokus.getIDVariTekstina(blokus.getVuorossa().getPelaajantID()) + " pelaaja on vuorossa.");
+            lisaaTeksti(" " + blokus.getIDVariTekstina(blokus.getVuorossa().getPelaajantID()) + " pelaaja on vuorossa.");
         }
 
     }
 
+    /**
+     * Lisää tapahtuma ruutuun parametrina annetun tekstin
+     *
+     * @param teksti
+     */
     public void lisaaTeksti(String teksti) {
         String nykyinen = tekstialue.getText();
         if (!teksti.isEmpty()) {
@@ -150,6 +173,9 @@ public class Kayttoliittyma extends JFrame {
 
     }
 
+    /**
+     * Päivittää pelaajien pisteet
+     */
     private void paivitaPisteTekstit() {
         pelaaja1Pisteet.setText("" + blokus.getPelaajanPisteet(1));
         pelaaja2Pisteet.setText("" + blokus.getPelaajanPisteet(2));
@@ -158,6 +184,9 @@ public class Kayttoliittyma extends JFrame {
 
     }
 
+    /**
+     * Päivittää muitten pelaajien jäljellä olevia laattoja esittävät valitsimet
+     */
     private void paivitaPienetValitsimet() {
         Queue<Pelaaja> jono = blokus.getPelaajat();
 
@@ -198,6 +227,9 @@ public class Kayttoliittyma extends JFrame {
 
     }
 
+    /**
+     * Pelin loppuessa purkaa komponentit jo tuo esiin lopputulokset.
+     */
     private void peliLoppuu() {
         getContentPane().removeAll();
         JPanel loppuTulokset = new JPanel();
@@ -210,7 +242,7 @@ public class Kayttoliittyma extends JFrame {
         JLabel sijoitus;
         JLabel pelaaja;
         JLabel tulos;
-        
+
         for (Map.Entry<Integer, Integer> entry : tulokset.entrySet()) {
             if (entry.getValue() != edellinen) {
                 sija++;
@@ -258,6 +290,10 @@ public class Kayttoliittyma extends JFrame {
         }
     }
 
+    /**
+     * Muodostaa pelilaudan komponentit ja liittää tarvittavat kuuntelijat
+     * siihen
+     */
     private void muodostaLauta() {
         lautaPaneeli = new JPanel();
         lautaPaneeli.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -274,6 +310,9 @@ public class Kayttoliittyma extends JFrame {
         lautaPaneeli.add(lautaLabel);
     }
 
+    /**
+     * Muodostaa käytössä olevia laattoja esittävän valitsimen
+     */
     private void muodostaLaattaPaneeli() {
         laattaPaneeli = new JPanel();
         laattaPaneeli.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -287,6 +326,10 @@ public class Kayttoliittyma extends JFrame {
         laattaPaneeli.add(laattaLabel);
     }
 
+    /**
+     * Muodostaa muitten kuin vuorossa olevan pelaajan laattavalitsimista
+     * näköiskuvat
+     */
     private void muodostaPienetLaattaKuvat() {
         miniLaattaKuva1 = new ImageIcon(laatat.muodostaTyhjaKuva(getBackground()));
         miniLaattaKuva2 = new ImageIcon(laatat.muodostaTyhjaKuva(getBackground()));
@@ -307,6 +350,9 @@ public class Kayttoliittyma extends JFrame {
         oikeaYlaPaneeli.setLayout(new BoxLayout(oikeaYlaPaneeli, BoxLayout.PAGE_AXIS));
     }
 
+    /**
+     * Muodostaa pelaajien sen hetkisiä pisteitä kuvastavan tilanteen
+     */
     private void muodostaPisteKentta() throws HeadlessException {
         oikeaKeskiPaneeli.setLayout(new GridLayout(5, 2));
         oikeaKeskiPaneeli.setBorder(new LineBorder(Color.BLACK));
@@ -337,6 +383,9 @@ public class Kayttoliittyma extends JFrame {
         oikeaKeskiPaneeli.setPreferredSize(new Dimension(190, 100));
     }
 
+    /**
+     * Muodostaa tapahtumat kertovan tekstilaatikon
+     */
     private void muodostaTapahtumaKentta() throws HeadlessException {
         tekstialue = new JTextArea();
         tekstialue.setText("Peli alkaa. \nAloita omasta kulmastasi. "
@@ -352,7 +401,7 @@ public class Kayttoliittyma extends JFrame {
         JScrollPane scroll = new JScrollPane(tekstialue);
         scroll.setVerticalScrollBarPolicy(
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setPreferredSize(new Dimension(190, 120));       
+        scroll.setPreferredSize(new Dimension(190, 120));
         DefaultCaret caret = (DefaultCaret) tekstialue.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         scroll.setFocusable(false);
@@ -361,6 +410,9 @@ public class Kayttoliittyma extends JFrame {
         oikeaAlaPaneeli.add(scroll);
     }
 
+    /**
+     * Muodostaa antautumis ja vuoron ohittamis napit
+     */
     private void muodostaNapit() {
         oikeaAlaPaneeli.add(Box.createRigidArea(new Dimension(0, 4)));
         JPanel napit = new JPanel();

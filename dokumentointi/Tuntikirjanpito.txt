@@ -10,4 +10,6 @@
 7.2       Testejä, käyttöliittymää  4h
 8.2       Testit, javadoc, käyttöliittymää bugeja (koordinaatit hukassa edelleen) 4h
 10.2 -13.2     Laattavalitsinta, käyttöliittymää. Muutoksia koodiin..  8h
+15.2 - 16.2    Viimeistelyä jne. 5h
+28.2           Palautus kuntoon 2h
 

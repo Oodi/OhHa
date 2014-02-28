@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * Visualisoi pelilaudan ja visualisoi pelilaudan yllä olevan "ilmatilan"
+ * @author Simo Auvinen
  */
 public class Lauta {
 
@@ -19,6 +20,11 @@ public class Lauta {
     private int[][] kulmat;
     
 
+    /**
+     * Liittää logiikan peliladan käyttöliittymään
+     * @param peliLauta
+     * @param resoluutio
+     */
     public Lauta(PeliLauta lauta, int resoluutio) {
         this.lauta = lauta;
         this.resoluutio = resoluutio;
@@ -30,6 +36,12 @@ public class Lauta {
 
     }
 
+    /**
+     *
+     * @param laatta
+     * @param y
+     * @param x
+     */
     public void paivitaVarjoLautaa(Laatta laatta, int y, int x) {
         lauta.alusta(varjoLauta);
         for (int i = 0; i < GlobaalitMuuttujat.RUUDUKON_KOKO; i++) {
@@ -41,10 +53,17 @@ public class Lauta {
         }
     }
 
+    /**
+     *
+     */
     public void alustaVarjoLauta() {
         lauta.alusta(varjoLauta);
     }
 
+    /**
+     *
+     * @return
+     */
     public BufferedImage muodostaLaudastaKuva() {
         BufferedImage kuva = new BufferedImage(resoluutio + 1, resoluutio + 1, BufferedImage.TYPE_INT_RGB);
         int ruudunKoko = resoluutio / (GlobaalitMuuttujat.LAUDAN_KOKO);
@@ -72,6 +91,11 @@ public class Lauta {
 
     }
 
+    /**
+     *
+     * @param pikseli
+     * @return
+     */
     public Point getSijainti(Point pikseli) {
         return new Point(pikseli.y / (resoluutio / GlobaalitMuuttujat.LAUDAN_KOKO), pikseli.x / (resoluutio / GlobaalitMuuttujat.LAUDAN_KOKO));
     }

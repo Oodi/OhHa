@@ -7,6 +7,7 @@ import java.util.HashMap;
  * Pelaaja luokka hallitsee pelaajan komponentteja. Ja laskee pelaajan sen
  * hetkisen pistemäärän.
  *
+ * @author Simo Auvinen
  */
 public class Pelaaja {
 

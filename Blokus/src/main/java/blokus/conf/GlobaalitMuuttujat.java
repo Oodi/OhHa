@@ -4,6 +4,7 @@ import java.awt.Color;
 
 /**
  * Sisältää kaikki globaalit muuttuja, jotka pysyvät samoina kokoajan.
+ * @author Simo Auvinen
  */
 public abstract class GlobaalitMuuttujat {
 

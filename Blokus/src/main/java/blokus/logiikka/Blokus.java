@@ -11,6 +11,7 @@ import java.util.TreeMap;
 /**
  * Luo peliin tarvittavat komponentit. Hallinnoi vuoronvaihtoa ja välittää
  * tietoa eteenpäin.
+ * @author Simo Auvinen
  */
 public class Blokus {
 

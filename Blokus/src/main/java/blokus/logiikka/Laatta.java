@@ -6,6 +6,8 @@ import blokus.conf.GlobaalitMuuttujat;
  * Pelaaja asettaa laattoja pelilaudalle. Laatalla on muoto, josta ilmenee sen
  * vuorovaikutus muiden pelilaudalla olevien laattojen suhteen. Laatan koko
  * vaikuttaa myös siitä saataviin pisteisiin.
+ * 
+ * @author Simo Auvinen
  */
 
 

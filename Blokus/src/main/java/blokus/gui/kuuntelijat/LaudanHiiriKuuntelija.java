@@ -15,6 +15,8 @@ import java.awt.event.MouseWheelListener;
 /**
  * Kuuntelee hiirtä, kun hiiri on pelilaudan yläpuolella. Lähettää laatan asettamis ja
  * kääntelemis komennot eteenpäin.
+ * 
+ * @author Simo Auvinen
  */
 
 public class LaudanHiiriKuuntelija implements MouseListener, MouseMotionListener, MouseWheelListener {
@@ -24,6 +26,12 @@ public class LaudanHiiriKuuntelija implements MouseListener, MouseMotionListener
     Point hiirenSijainti;
     Kayttoliittyma liittyma;
 
+    /**
+     *
+     * @param blokus
+     * @param lauta
+     * @param liittyma
+     */
     public LaudanHiiriKuuntelija(Blokus blokus, Lauta lauta, Kayttoliittyma liittyma) {
         this.blokus = blokus;
         this.lauta = lauta;
@@ -100,6 +108,9 @@ public class LaudanHiiriKuuntelija implements MouseListener, MouseMotionListener
         
     }
 
+    /**
+     *
+     */
     public void paivitaVarjolautaa() {
         if (hiirenSijainti != null) {
         lauta.paivitaVarjoLautaa(blokus.getVuorossa().getValittuna(), hiirenSijainti.x, hiirenSijainti.y);

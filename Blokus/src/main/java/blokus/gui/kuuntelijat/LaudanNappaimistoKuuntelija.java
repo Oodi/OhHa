@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 
 /**
  * Kuuntelee näppäimistön nuolinäppäimiä ja kääntää valittua laattaa.
+ * 
+ * @author Simo Auvinen
  */
 
 
@@ -15,6 +17,11 @@ public class LaudanNappaimistoKuuntelija extends KeyAdapter {
     Blokus blokus;
     LaudanHiiriKuuntelija hiiri;
     
+    /**
+     *
+     * @param blokus
+     * @param hiiri
+     */
     public LaudanNappaimistoKuuntelija(Blokus blokus,LaudanHiiriKuuntelija hiiri) {
         this.blokus = blokus;   
         this.hiiri = hiiri;

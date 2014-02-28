@@ -13,6 +13,8 @@ import java.awt.event.MouseMotionListener;
 /**
  * Kuuntelee hiirtä, kun hiiri on laatta valitsimen yläpuolella. Havaitsee 
  * laattojen vaihtamis klikkaukset ja vaihtaa valittuna olevaa laattaa.
+ * 
+ * @author Simo Auvinen
  */
 
 public class LaattojenHiiriKuuntelija implements MouseListener, MouseMotionListener {
@@ -22,6 +24,12 @@ public class LaattojenHiiriKuuntelija implements MouseListener, MouseMotionListe
     LaattaValitsin valitsin;
     Kayttoliittyma liittyma;
 
+    /**
+     *
+     * @param blokus
+     * @param valitsin
+     * @param liittyma
+     */
     public LaattojenHiiriKuuntelija(Blokus blokus, LaattaValitsin valitsin, Kayttoliittyma liittyma) {
         this.blokus = blokus;
         this.valitsin = valitsin;

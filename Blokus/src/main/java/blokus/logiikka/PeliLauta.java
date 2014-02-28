@@ -7,6 +7,8 @@ import java.util.Map;
 /**
  * Pelilaudalle sijoitetaan laatat. Pelilauta esittää laattojen omistajat.
  * Pelilauta päivittää myös pelaajien tarkastus laudat oikeanlaisiksi.
+ * 
+ * @author Simo Auvinen
  */
 public class PeliLauta {
 
@@ -31,7 +33,7 @@ public class PeliLauta {
      * virhetekstin, joka kuvaa miksi lisääminen tähän kohtaan ei onnistu.
      * 
      * @param pelaajaId
-     * @param laatta
+     * @param laatta  Lisättävä laatta
      * @param y
      * @param x
      * @return Palauttaa true, jos laatan lisääminen onnistui, muuten false
@@ -49,6 +51,16 @@ public class PeliLauta {
         }
 
     }
+    
+        /**
+     * Metodi päivittää jo hyväksytyn asettamisen pelilaudalle ja kaikille
+     * tarkastuslaudoille.
+     * 
+     * @param kasiteltava  Tarkastus lauta jolle laatta lisätään
+     * @param laatta  Lisättävä laatta
+     * @param y
+     * @param x
+     */
 
     private void lisaaLaatta(TarkastusLauta kasiteltava, Laatta laatta, int y, int x) {
         for (int i = 0; i < GlobaalitMuuttujat.RUUDUKON_KOKO; i++) {

@@ -6,11 +6,20 @@ import blokus.logiikka.Blokus;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Kuuntelee antautumis nappia ja antauttaa pelaajan tarvittaessa
+ * @author Simo Auvinen
+ */
 public class AntautumisKuuntelija implements ActionListener {
 
     Blokus blokus;
     Kayttoliittyma liittyma;
 
+    /**
+     *
+     * @param blokus
+     * @param liittyma
+     */
     public AntautumisKuuntelija(Blokus blokus, Kayttoliittyma liittyma) {
         this.blokus = blokus;
         this.liittyma = liittyma;

@@ -8,11 +8,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
+/**
+ * Kuuntelee vuoronohittamis nappia
+ * @author Simo Auvinen
+ */
 public class OhitaVuoroKuuntelija implements ActionListener {
     
     Blokus blokus;
     Kayttoliittyma liittyma;
     
+    /**
+     *
+     * @param blokus
+     * @param liittyma
+     */
     public OhitaVuoroKuuntelija(Blokus blokus, Kayttoliittyma liittyma) {
         this.blokus = blokus;
         this.liittyma = liittyma;

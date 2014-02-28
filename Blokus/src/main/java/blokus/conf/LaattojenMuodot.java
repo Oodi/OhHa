@@ -2,6 +2,7 @@ package blokus.conf;
 
 /**
  * Sisältää kaikki laatat ja niiden muodot.
+ * @author Simo Auvinen
  */
 
 

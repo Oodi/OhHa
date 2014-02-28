@@ -7,6 +7,8 @@ import java.util.HashMap;
 /**
  * PelaajanLaatat luo pelaajalle alussa kaikki käytössä olevat laatat ja pitää
  * niitä kasassa.
+ * 
+ * @author Simo Auvinen
  */
 public class PelaajanLaatat {
 

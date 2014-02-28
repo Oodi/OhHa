@@ -6,6 +6,8 @@ import blokus.conf.GlobaalitMuuttujat;
  * Jokaisella pelaajalla on oma näkökulmansa pelilaudalle, siis mihin hän
  * voi laattansa asettaa. Tarkastus laudalta tarkastetaan voiko pelaaja asettaa
  * laattansa tiettyyn kohtaa lautaa.
+ * 
+ * @author Simo Auvinen
  */
 
 public class TarkastusLauta {
